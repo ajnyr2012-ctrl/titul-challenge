@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-        <!-- Подтверждение прав для Яндекс.Вебмастер -->
-    <meta name="yandex-verification" content="<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>Verification: 112c2d0d32174e24</body>
-</html>" />
+    
     <!-- Подтверждение прав для Google Search Console -->
-    <meta name="google-site-verification" content="google-site-verification: google3644c822e9c3963d.html" />
-    <meta name="description" content="Titul Challenge — крути рулетку титулов Brawl Stars!">
+    <meta name="google-site-verification" content="google3644c822e9c3963d" />
+    <!-- Подтверждение прав для Яндекс.Вебмастер -->
+    <meta name="yandex-verification" content="112c2d0d32174e24" />
+    
+    <meta name="description" content="Titul Challenge — крути рулетку титулов Brawl Stars! Выбери уровень сложности и испытай удачу.">
+    <meta name="keywords" content="Brawl Stars, титулы, рулетка, престиж, игра, колесо фортуны">
+    
     <title>Titul Challenge | Brawl Stars Wheel</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@700;800;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -112,7 +113,8 @@
             min-width: 0;
         }
 
-        .nearby-area {
+        /* Боковая панель — теперь выбор уровня */
+        .level-panel {
             flex: 1;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(8px);
@@ -124,55 +126,53 @@
             flex-direction: column;
         }
 
-        .nearby-title {
+        .level-title {
             text-align: center;
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             font-size: 1.4rem;
             color: #FFD966;
             text-shadow: 0 0 6px #ff9900;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             letter-spacing: 1px;
         }
 
-        .nearby-slots {
+        .level-buttons {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             flex: 1;
+            justify-content: center;
         }
 
-        .nearby-card {
-            background: linear-gradient(145deg, #1e2a2f, #0f191f);
-            border-radius: 24px;
-            padding: 12px 8px;
-            border: 1px solid #ffc85080;
-            box-shadow: 0 4px 0 #00000066;
-            transition: 0.1s;
+        .level-btn {
+            background: transparent;
+            border: 2px solid #ffb347;
+            color: #ffd966;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            padding: 16px 10px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.3);
             text-align: center;
         }
 
-        .nearby-label {
-            font-size: 0.75rem;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 6px;
+        .level-btn:hover {
+            background: rgba(255, 180, 71, 0.2);
+            box-shadow: 0 0 15px #ffb34780;
         }
 
-        .nearby-title-text {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #FFE3A4;
-            text-shadow: 0 1px 3px black;
-            word-break: break-word;
-        }
-
-        .nearby-brawler {
-            font-size: 0.8rem;
-            color: #8ac4ff;
-            margin-top: 4px;
+        .level-btn.active {
+            background: #ffb347;
+            color: #0a0f1a;
+            box-shadow: 0 0 20px #ffb347;
+            border-color: #fff3b0;
         }
 
         .wheel-horizontal-container {
@@ -182,6 +182,7 @@
             padding: 18px 12px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,200,0.2);
             border: 1px solid #ffb34760;
+            margin: 20px 0;
         }
 
         .wheel-track {
@@ -349,15 +350,40 @@
             font-size: 0.65rem;
             color: #5e7a5e;
             margin-top: 28px;
-            opacity: 0.6;
+            opacity: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .youtube-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ff8888;
+            text-decoration: none;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 18px;
+            border-radius: 40px;
+            border: 1px solid #ff444480;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+        }
+
+        .youtube-link:hover {
+            background: rgba(255, 50, 50, 0.2);
+            border-color: #ff0000;
+            color: #ffaaaa;
+            box-shadow: 0 0 12px #ff000080;
         }
 
         @media (max-width: 900px) {
             .main-layout {
                 flex-direction: column;
-            }
-            .nearby-area {
-                margin-top: 10px;
             }
             h1 {
                 font-size: 2.5rem;
@@ -375,20 +401,13 @@
                 width: 140px;
                 padding: 12px 5px;
             }
-            .sector-card span.title-text {
-                font-size: 0.8rem;
-            }
-            .title-name {
-                font-size: 1.5rem;
+            .level-btn {
+                font-size: 1.1rem;
+                padding: 12px 8px;
             }
             .spin-btn {
                 padding: 12px 28px;
                 font-size: 1.4rem;
-            }
-            .pointer-indicator {
-                top: -24px;
-                width: 48px;
-                height: 48px;
             }
         }
 
@@ -414,9 +433,9 @@
         <div class="wheel-area">
             <div class="wheel-horizontal-container">
                 <div class="pointer-indicator">
-                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 40 40" fill="none">
                         <defs>
-                            <linearGradient id="arrowGrad" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse">
+                            <linearGradient id="arrowGrad" x1="20" y1="0" x2="20" y2="40">
                                 <stop offset="0%" stop-color="#FFF3B0"/>
                                 <stop offset="40%" stop-color="#FFB347"/>
                                 <stop offset="100%" stop-color="#FF4D00"/>
@@ -443,443 +462,433 @@
             <div class="result-card" id="resultCard">
                 <div class="result-label">🏅 ВЫПАВШИЙ ТИТУЛ 🏅</div>
                 <div class="title-name" id="titleDisplay">—</div>
-                <div class="brawler-name" id="brawlerDisplay">Ожидание спина</div>
-                <div class="prestige-badge" id="prestigeType">✨ ПРАЙМ I / ПРАЙМ III ✨</div>
+                <div class="brawler-name" id="brawlerDisplay">Выбери уровень и крути</div>
+                <div class="prestige-badge" id="prestigeType">✨ — ✨</div>
             </div>
         </div>
 
-        <!-- Блок "Могло выпасть" -->
-        <div class="nearby-area" id="nearbyPanel">
-            <div class="nearby-title">⚡ МОГЛО ВЫПАСТЬ ⚡</div>
-            <div class="nearby-slots" id="nearbySlots">
-                <div class="nearby-card">
-                    <div class="nearby-label">← ЛЕВЕЕ</div>
-                    <div class="nearby-title-text" id="leftTitle">—</div>
-                    <div class="nearby-brawler" id="leftBrawler">—</div>
-                </div>
-                <div class="nearby-card">
-                    <div class="nearby-label">→ ПРАВЕЕ</div>
-                    <div class="nearby-title-text" id="rightTitle">—</div>
-                    <div class="nearby-brawler" id="rightBrawler">—</div>
-                </div>
+        <!-- Боковая панель выбора уровня -->
+        <div class="level-panel">
+            <div class="level-title">⚡ ВЫБЕРИ УРОВЕНЬ ⚡</div>
+            <div class="level-buttons">
+                <button class="level-btn active" data-level="novice">🔥 НОВИЧОК</button>
+                <button class="level-btn" data-level="master">⚡ МАСТЕР</button>
+                <button class="level-btn" data-level="old">💀 ОЛД</button>
+            </div>
+            <div style="margin-top: auto; font-size: 0.8rem; color: #aaa; text-align: center; padding-top: 15px;">
+                S/A • B/C • D/F
             </div>
         </div>
     </div>
-    <footer>🎮 Киберспортивный вызов | Лента титулов Brawl Stars</footer>
+
+    <footer>
+        <div>🎮 Titul Challenge | Глобальная обнова с рангами</div>
+        <a class="youtube-link" href="https://www.youtube.com/@Shabsshnik" target="_blank">
+            🎥 Мой YouTube: @Shabsshnik
+        </a>
+    </footer>
 </div>
 
 <script>
-    // --------------------------------------------------------------
-    // ДАННЫЕ ТИТУЛОВ (полный список, актуальный)
-    // --------------------------------------------------------------
-    const TITLES_LIBRARY = [
-        { brawler: "Шелли", normal: "Некогда объяснять!", neon: "Фантастика" },
-        { brawler: "Нита", normal: "Дикое сердце", neon: "Диковинка" },
-        { brawler: "Кольт", normal: "Красавчик", neon: "ПИФ-ПАФ" },
-        { brawler: "Булл", normal: "Бульдозер!", neon: "Неудержимый" },
-        { brawler: "Брок", normal: "Бум!", neon: "Не сопротивляйся" },
-        { brawler: "Эль Примо", normal: "Эль Лучадор", neon: "Sin dolor, no hay gloria!" },
-        { brawler: "Барли", normal: "Ваш заказ!", neon: "Последний заказ" },
-        { brawler: "Поко", normal: "Эль Мариачи", neon: "Бард" },
-        { brawler: "Роза", normal: "Трогаю траву", neon: "Цветочек" },
-        { brawler: "Джесси", normal: "Инженер", neon: "Сейчас всё исправлю!" },
-        { brawler: "Динамайк", normal: "Птичка, птичка, птичка!", neon: "МИСТЕР БОМБАСТИК" },
-        { brawler: "Тик", normal: "Без башни", neon: "Горячая голова" },
-        { brawler: "8-БИТ", normal: "SYS 64738", neon: "Ты проиграешь!" },
-        { brawler: "Рико", normal: "Сердцеед", neon: "Рикошет" },
-        { brawler: "Дэррил", normal: "Пир-р-рат!", neon: "Капитан" },
-        { brawler: "Пенни", normal: "Просоленная", neon: "Бунт" },
-        { brawler: "Карл", normal: "Геолог", neon: "Гений" },
-        { brawler: "Джеки", normal: "#@%**", neon: "Тебе **!" },
-        { brawler: "Гас", normal: "Потеряшка", neon: "С шариком" },
-        { brawler: "Бо", normal: "В гармонии с природой", neon: "Главное — терпение!" },
-        { brawler: "Эмз", normal: "#хейтеры", neon: "Хейтер" },
-        { brawler: "Сту", normal: "Дикий", neon: "Чучело" },
-        { brawler: "Пайпер", normal: "Снайпер", neon: "Попадаю только в голову" },
-        { brawler: "Пэм", normal: "Твоя мамка", neon: "Утилизирую врагов" },
-        { brawler: "Фрэнк", normal: "Тру танк", neon: "Мастер лоботомии" },
-        { brawler: "Биби", normal: "Крутышка", neon: "Жую жвачку" },
-        { brawler: "Беа", normal: "Королева", neon: "Добрая душа" },
-        { brawler: "Нани", normal: "Няня", neon: "У тебя всё норм?" },
-        { brawler: "Эдгар", normal: "Президент Brawl Stars", neon: "ИЗИ" },
-        { brawler: "Грифф", normal: "Жадина", neon: "Нужно больше золота!" },
-        { brawler: "Гром", normal: "Одной левой!", neon: "Красная шапочка" },
-        { brawler: "Бонни", normal: "Сорвиголова", neon: "Без зубов" },
-        { brawler: "Гэйл", normal: "Уборщик", neon: "На пенсии" },
-        { brawler: "Колетт", normal: "Фанатка", neon: "Brawl Stars навсегда!" },
-        { brawler: "Белль", normal: "Старр", neon: "В розыске" },
-        { brawler: "Эш", normal: "В хлам!", neon: "Мусор" },
-        { brawler: "Лола", normal: "Королева драмы", neon: "Дива" },
-        { brawler: "Сэм", normal: "В табло!", neon: "Отбивная" },
-        { brawler: "Мэнди", normal: "Ириска", neon: "БЕСПЛАТНЫЕ КОНФЕТЫ" },
-        { brawler: "Мэйси", normal: "Контролируемая катастрофа", neon: "Взрывной характер" },
-        { brawler: "Хэнк", normal: "Боевая креветка", neon: "Мал, да удал" },
-        { brawler: "Перл", normal: "Шеф-повар", neon: "Люблю печеньки" },
-        { brawler: "Ларри и Лори", normal: "Я тут закон!", neon: "Подчиняйся или плати!" },
-        { brawler: "Анджело", normal: "Жажда крови", neon: "Люблю сплетни" },
-        { brawler: "Берри", normal: "Единорог", neon: "Спокойной ночи" },
-        { brawler: "Шейд", normal: "Призрак", neon: "Игнорирую недостойных" },
-        { brawler: "Мипл", normal: "Читер", neon: "Моя игра — мои правила!" },
-        { brawler: "Транк", normal: "Муравьиная марионетка", neon: "МЫ ЕСТЬ ТРАНК" },
-        { brawler: "Мортис", normal: "Порождение ночи", neon: "Вестник рока" },
-        { brawler: "Тара", normal: "Какой расклад?", neon: "Меняю будущее" },
-        { brawler: "Джин", normal: "Распускаю руки", neon: "Абракадабра" },
-        { brawler: "Макс", normal: "Я СКОРОСТЬ!", neon: "Попробуй догони" },
-        { brawler: "Мистер П.", normal: "Босс", neon: "Большая птичка" },
-        { brawler: "Спраут", normal: "Друг растений", neon: "С любовью" },
-        { brawler: "Байрон", normal: "Сенсация", neon: "Тебе конец" },
-        { brawler: "Скуик", normal: "Нежданчик", neon: "Антистресс" },
-        { brawler: "Лу", normal: "К вашим услугам!", neon: "Морозильник" },
-        { brawler: "Гавс", normal: "Генерал", neon: "Хороший пёсик" },
-        { brawler: "Базз", normal: "Плохой парень", neon: "Пей больше воды" },
-        { brawler: "Фэнг", normal: "Мастер пинка", neon: "Люблю день ног" },
-        { brawler: "Ева", normal: "Мать", neon: "Мамочка" },
-        { brawler: "Джанет", normal: "Ракета!", neon: "Старшая сестра" },
-        { brawler: "Отис", normal: "Художник", neon: "Чё?" },
-        { brawler: "Бастер", normal: "Блокбастер", neon: "Как в кино" },
-        { brawler: "Грей", normal: "Загадка", neon: "Тс-с-с!" },
-        { brawler: "R-T", normal: "Наблюдатель", neon: "Слежу за тобой" },
-        { brawler: "Виллоу", normal: "У тебя в голове!", neon: "Манипулятор" },
-        { brawler: "Даг", normal: "Сосиска", neon: "Остынь, бро" },
-        { brawler: "Чак", normal: "Маэстро", neon: "Чух-чух!" },
-        { brawler: "Чарли", normal: "Удивительная", neon: "Главная звезда" },
-        { brawler: "Мико", normal: "Я для тебя шутка какая-то?", neon: "Банан" },
-        { brawler: "Мелоди", normal: "Бесстрашие", neon: "Мелодия" },
-        { brawler: "Лили", normal: "Заноза", neon: "Не оборачивайся" },
-        { brawler: "Клэнси", normal: "Контуженный", neon: "Без жалости" },
-        { brawler: "Мо", normal: "Сырник", neon: "Вы за кого меня держите?" },
-        { brawler: "Джуджу", normal: "Во власти чар", neon: "Волк в овечьей шкуре" },
-        { brawler: "Олли", normal: "Это база!", neon: "Скейтер" },
-        { brawler: "Финкс", normal: "Время на ветер", neon: "Кошачий раб" },
-        { brawler: "Луми", normal: "Хедбэнгинг", neon: "И тепло, и холодно" },
-        { brawler: "Спайк", normal: "Один такой", neon: "Нет слов" },
-        { brawler: "Ворон", normal: "Токсик", neon: "Змея" },
-        { brawler: "Леон", normal: "Проныра", neon: "Вот я есть, а вот меня нет…" },
-        { brawler: "Сэнди", normal: "Соня", neon: "Сплю" },
-        { brawler: "Амбер", normal: "Зажигалка", neon: "Жгу!" },
-        { brawler: "Мэг", normal: "Техподдержка 2.0", neon: "Тяжелый металл" },
-        { brawler: "Вольт", normal: "Бро", neon: "Электрик" },
-        { brawler: "Честер", normal: "Мастер на все руки", neon: "Джокер" },
-        { brawler: "Корделиус", normal: "Токсичный", neon: "Хранитель грибниц" },
-        { brawler: "Кит", normal: "Мяу", neon: "Рыбовое" },
-        { brawler: "Драко", normal: "Хозяин подземелья", neon: "Металлист" },
-        { brawler: "Кэндзи", normal: "Самурай", neon: "Суши-мастер" },
-        { brawler: "Кадзэ", normal: "Писаю в бассейн", neon: "Плохой полицейский" },
-        { brawler: "Сириус", normal: "Ниндзя", neon: "Словно ветер" }
-    ];
+    (function(){
+        "use strict";
 
-    // Формируем плоский массив секторов
-    let flatSectors = [];
-    TITLES_LIBRARY.forEach(entry => {
-        flatSectors.push({
-            id: `${entry.brawler}_normal`,
-            title: entry.normal,
-            brawler: entry.brawler,
-            type: "🏆 ПРАЙМ I (Мастерство) 🏆"
-        });
-        flatSectors.push({
-            id: `${entry.brawler}_neon`,
-            title: entry.neon,
-            brawler: entry.brawler,
-            type: "✨ ПРАЙМ III (Неоновый престиж) ✨"
-        });
-    });
+        // ---------- БАЗА ТИТУЛОВ ----------
+        const TITLES_LIBRARY = [
+            { brawler: "Шелли", normal: "Некогда объяснять!", neon: "Фантастика" },
+            { brawler: "Нита", normal: "Дикое сердце", neon: "Диковинка" },
+            { brawler: "Кольт", normal: "Красавчик", neon: "ПИФ-ПАФ" },
+            { brawler: "Булл", normal: "Бульдозер!", neon: "Неудержимый" },
+            { brawler: "Брок", normal: "Бум!", neon: "Не сопротивляйся" },
+            { brawler: "Эль Примо", normal: "Эль Лучадор", neon: "Sin dolor, no hay gloria!" },
+            { brawler: "Барли", normal: "Ваш заказ!", neon: "Последний заказ" },
+            { brawler: "Поко", normal: "Эль Мариачи", neon: "Бард" },
+            { brawler: "Роза", normal: "Трогаю траву", neon: "Цветочек" },
+            { brawler: "Джесси", normal: "Инженер", neon: "Сейчас всё исправлю!" },
+            { brawler: "Динамайк", normal: "Птичка, птичка, птичка!", neon: "МИСТЕР БОМБАСТИК" },
+            { brawler: "Тик", normal: "Без башни", neon: "Горячая голова" },
+            { brawler: "8-БИТ", normal: "SYS 64738", neon: "Ты проиграешь!" },
+            { brawler: "Рико", normal: "Сердцеед", neon: "Рикошет" },
+            { brawler: "Дэррил", normal: "Пир-р-рат!", neon: "Капитан" },
+            { brawler: "Пенни", normal: "Просоленная", neon: "Бунт" },
+            { brawler: "Карл", normal: "Геолог", neon: "Гений" },
+            { brawler: "Джеки", normal: "#@%**", neon: "Тебе **!" },
+            { brawler: "Гас", normal: "Потеряшка", neon: "С шариком" },
+            { brawler: "Бо", normal: "В гармонии с природой", neon: "Главное — терпение!" },
+            { brawler: "Эмз", normal: "#хейтеры", neon: "Хейтер" },
+            { brawler: "Сту", normal: "Дикий", neon: "Чучело" },
+            { brawler: "Пайпер", normal: "Снайпер", neon: "Попадаю только в голову" },
+            { brawler: "Пэм", normal: "Твоя мамка", neon: "Утилизирую врагов" },
+            { brawler: "Фрэнк", normal: "Тру танк", neon: "Мастер лоботомии" },
+            { brawler: "Биби", normal: "Крутышка", neon: "Жую жвачку" },
+            { brawler: "Беа", normal: "Королева", neon: "Добрая душа" },
+            { brawler: "Нани", normal: "Няня", neon: "У тебя всё норм?" },
+            { brawler: "Эдгар", normal: "Президент Brawl Stars", neon: "ИЗИ" },
+            { brawler: "Грифф", normal: "Жадина", neon: "Нужно больше золота!" },
+            { brawler: "Гром", normal: "Одной левой!", neon: "Красная шапочка" },
+            { brawler: "Бонни", normal: "Сорвиголова", neon: "Без зубов" },
+            { brawler: "Гэйл", normal: "Уборщик", neon: "На пенсии" },
+            { brawler: "Колетт", normal: "Фанатка", neon: "Brawl Stars навсегда!" },
+            { brawler: "Белль", normal: "Старр", neon: "В розыске" },
+            { brawler: "Эш", normal: "В хлам!", neon: "Мусор" },
+            { brawler: "Лола", normal: "Королева драмы", neon: "Дива" },
+            { brawler: "Сэм", normal: "В табло!", neon: "Отбивная" },
+            { brawler: "Мэнди", normal: "Ириска", neon: "БЕСПЛАТНЫЕ КОНФЕТЫ" },
+            { brawler: "Мэйси", normal: "Контролируемая катастрофа", neon: "Взрывной характер" },
+            { brawler: "Хэнк", normal: "Боевая креветка", neon: "Мал, да удал" },
+            { brawler: "Перл", normal: "Шеф-повар", neon: "Люблю печеньки" },
+            { brawler: "Ларри и Лори", normal: "Я тут закон!", neon: "Подчиняйся или плати!" },
+            { brawler: "Анджело", normal: "Жажда крови", neon: "Люблю сплетни" },
+            { brawler: "Берри", normal: "Единорог", neon: "Спокойной ночи" },
+            { brawler: "Шейд", normal: "Призрак", neon: "Игнорирую недостойных" },
+            { brawler: "Мипл", normal: "Читер", neon: "Моя игра — мои правила!" },
+            { brawler: "Транк", normal: "Муравьиная марионетка", neon: "МЫ ЕСТЬ ТРАНК" },
+            { brawler: "Мортис", normal: "Порождение ночи", neon: "Вестник рока" },
+            { brawler: "Тара", normal: "Какой расклад?", neon: "Меняю будущее" },
+            { brawler: "Джин", normal: "Распускаю руки", neon: "Абракадабра" },
+            { brawler: "Макс", normal: "Я СКОРОСТЬ!", neon: "Попробуй догони" },
+            { brawler: "Мистер П.", normal: "Босс", neon: "Большая птичка" },
+            { brawler: "Спраут", normal: "Друг растений", neon: "С любовью" },
+            { brawler: "Байрон", normal: "Сенсация", neon: "Тебе конец" },
+            { brawler: "Скуик", normal: "Нежданчик", neon: "Антистресс" },
+            { brawler: "Лу", normal: "К вашим услугам!", neon: "Морозильник" },
+            { brawler: "Гавс", normal: "Генерал", neon: "Хороший пёсик" },
+            { brawler: "Базз", normal: "Плохой парень", neon: "Пей больше воды" },
+            { brawler: "Фэнг", normal: "Мастер пинка", neon: "Люблю день ног" },
+            { brawler: "Ева", normal: "Мать", neon: "Мамочка" },
+            { brawler: "Джанет", normal: "Ракета!", neon: "Старшая сестра" },
+            { brawler: "Отис", normal: "Художник", neon: "Чё?" },
+            { brawler: "Бастер", normal: "Блокбастер", neon: "Как в кино" },
+            { brawler: "Грей", normal: "Загадка", neon: "Тс-с-с!" },
+            { brawler: "R-T", normal: "Наблюдатель", neon: "Слежу за тобой" },
+            { brawler: "Виллоу", normal: "У тебя в голове!", neon: "Манипулятор" },
+            { brawler: "Даг", normal: "Сосиска", neon: "Остынь, бро" },
+            { brawler: "Чак", normal: "Маэстро", neon: "Чух-чух!" },
+            { brawler: "Чарли", normal: "Удивительная", neon: "Главная звезда" },
+            { brawler: "Мико", normal: "Я для тебя шутка какая-то?", neon: "Банан" },
+            { brawler: "Мелоди", normal: "Бесстрашие", neon: "Мелодия" },
+            { brawler: "Лили", normal: "Заноза", neon: "Не оборачивайся" },
+            { brawler: "Клэнси", normal: "Контуженный", neon: "Без жалости" },
+            { brawler: "Мо", normal: "Сырник", neon: "Вы за кого меня держите?" },
+            { brawler: "Джуджу", normal: "Во власти чар", neon: "Волк в овечьей шкуре" },
+            { brawler: "Олли", normal: "Это база!", neon: "Скейтер" },
+            { brawler: "Финкс", normal: "Время на ветер", neon: "Кошачий раб" },
+            { brawler: "Луми", normal: "Хедбэнгинг", neon: "И тепло, и холодно" },
+            { brawler: "Спайк", normal: "Один такой", neon: "Нет слов" },
+            { brawler: "Ворон", normal: "Токсик", neon: "Змея" },
+            { brawler: "Леон", normal: "Проныра", neon: "Вот я есть, а вот меня нет…" },
+            { brawler: "Сэнди", normal: "Соня", neon: "Сплю" },
+            { brawler: "Амбер", normal: "Зажигалка", neon: "Жгу!" },
+            { brawler: "Мэг", normal: "Техподдержка 2.0", neon: "Тяжелый металл" },
+            { brawler: "Вольт", normal: "Бро", neon: "Электрик" },
+            { brawler: "Честер", normal: "Мастер на все руки", neon: "Джокер" },
+            { brawler: "Корделиус", normal: "Токсичный", neon: "Хранитель грибниц" },
+            { brawler: "Кит", normal: "Мяу", neon: "Рыбовое" },
+            { brawler: "Драко", normal: "Хозяин подземелья", neon: "Металлист" },
+            { brawler: "Кэндзи", normal: "Самурай", neon: "Суши-мастер" },
+            { brawler: "Кадзэ", normal: "Писаю в бассейн", neon: "Плохой полицейский" },
+            { brawler: "Сириус", normal: "Ниндзя", neon: "Словно ветер" }
+        ];
 
-    // Перемешиваем
-    function shuffleArray(arr) {
-        for (let i = arr.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [arr[i], arr[j]] = [arr[j], arr[i]];
+        // ---------- РАНГИ БОЙЦОВ (по списку) ----------
+        const rankMap = new Map();
+        // S
+        ['Мортис','Нани','Булл','Ворон','Кольт','Леон','Биби'].forEach(b => rankMap.set(b, 'S'));
+        // A
+        ['Клэнси','Спайк','Честер','Сириус','Базз','Эмз','Брок'].forEach(b => rankMap.set(b, 'A'));
+        // B
+        ['Мелоди','Мэнди','Бо','Беа','Рико','Кадзэ','Шелли','Мэйси','Сту','Мипл','Байрон','Пайпер','Белль','Фрэнк','Джин','Джанет','Лола','Джуджу','Бонни','Джесси','Нита','Отис','Эдгар','Бастер','Лили'].forEach(b => rankMap.set(b, 'B'));
+        // C
+        ['Анджело','Роза','Даг','Финкс','Пенни','Скуик','Перл','Кэндзи','Корделиус','Мэг','Мо','Чарли','Лу','R-T','Джеки','Фэнг','Пэм','Гас','8-БИТ','Транк','Сэнди','Поко'].forEach(b => rankMap.set(b, 'C'));
+        // D
+        ['Амбер','Эш','Ева','Макс','Луми','Шейд','Карл','Мистер П.','Тик','Хэнк','Мико','Эль Примо','Драко','Гэйл'].forEach(b => rankMap.set(b, 'D'));
+        // F
+        ['Нани','Грей','Дэррил','Грифф','Тара','Олли','Динамайк','Сэм','Колетт','Ларри и Лори','Виллоу','Спраут','Гром','Берри','Барли','Чак'].forEach(b => rankMap.set(b, 'F'));
+
+        // Защита от отсутствующих
+        TITLES_LIBRARY.forEach(entry => {
+            if (!rankMap.has(entry.brawler)) rankMap.set(entry.brawler, 'F');
+        });
+
+        // ---------- ГЕНЕРАЦИЯ СЕКТОРОВ ПО УРОВНЮ ----------
+        function buildSectorsForLevel(level) {
+            const sectors = [];
+            TITLES_LIBRARY.forEach(entry => {
+                const rank = rankMap.get(entry.brawler);
+                let includeNormal = false;
+                let includeNeon = false;
+
+                if (level === 'novice') {
+                    if (rank === 'S' || rank === 'A') includeNormal = true;
+                } else if (level === 'master') {
+                    if (rank === 'B' || rank === 'C') {
+                        includeNormal = true;
+                        includeNeon = true;
+                    }
+                } else if (level === 'old') {
+                    if (rank === 'D' || rank === 'F') {
+                        includeNeon = true;   // ТОЛЬКО третий прайм
+                    }
+                }
+
+                if (includeNormal) {
+                    sectors.push({
+                        id: `${entry.brawler}_normal_${level}`,
+                        title: entry.normal,
+                        brawler: entry.brawler,
+                        type: "🏆 ПРАЙМ I (Мастерство) 🏆"
+                    });
+                }
+                if (includeNeon) {
+                    sectors.push({
+                        id: `${entry.brawler}_neon_${level}`,
+                        title: entry.neon,
+                        brawler: entry.brawler,
+                        type: "✨ ПРАЙМ III (Неоновый престиж) ✨"
+                    });
+                }
+            });
+            return shuffleArray(sectors);
         }
-        return arr;
-    }
-    flatSectors = shuffleArray(flatSectors);
 
-    // 15 КОПИЙ ДЛЯ ОГРОМНОГО ЗАПАСА
-    let duplicatedSectors = [];
-    for (let i = 0; i < 15; i++) {
-        duplicatedSectors.push(...flatSectors);
-    }
-    
-    const itemWidth = 188; // 180 + 4*2
-
-    // DOM элементы
-    const wheelStrip = document.getElementById('wheelStrip');
-    const spinBtn = document.getElementById('spinBtn');
-    const titleDisplaySpan = document.getElementById('titleDisplay');
-    const brawlerDisplaySpan = document.getElementById('brawlerDisplay');
-    const prestigeTypeSpan = document.getElementById('prestigeType');
-    const resultCardDiv = document.getElementById('resultCard');
-    const leftTitle = document.getElementById('leftTitle');
-    const leftBrawler = document.getElementById('leftBrawler');
-    const rightTitle = document.getElementById('rightTitle');
-    const rightBrawler = document.getElementById('rightBrawler');
-
-    let currentTranslateX = 0;
-    let spinningActive = false;
-    let animFrame = null;
-    let spinStartTime = 0;
-    const spinDuration = 2000;
-    let startTranslate = 0;
-    let targetTranslate = 0;
-
-    // ФЛАГ ОДНОЙ ПОПЫТКИ
-    let spinUsed = false;
-    let lastSelectedId = null;
-
-    function renderStrip() {
-        wheelStrip.innerHTML = '';
-        duplicatedSectors.forEach((sector) => {
-            const card = document.createElement('div');
-            card.className = 'sector-card';
-            card.innerHTML = `
-                <span class="title-text">${sector.title.length > 28 ? sector.title.slice(0,26)+'..' : sector.title}</span>
-                <span class="brawler-mini">${sector.brawler}</span>
-            `;
-            wheelStrip.appendChild(card);
-        });
-        
-        // Стартовое смещение: берём 7-ю копию (индекс 6) для огромного запаса с обеих сторон
-        const startOffset = -(flatSectors.length * 7 * itemWidth);
-        wheelStrip.style.transform = `translateX(${startOffset}px)`;
-        currentTranslateX = startOffset;
-    }
-
-    function highlightCenterCard() {
-        const cards = document.querySelectorAll('.sector-card');
-        cards.forEach(card => card.classList.remove('highlight'));
-        const idx = getCentralSectorIndex();
-        if (idx !== -1 && cards[idx]) {
-            cards[idx].classList.add('highlight');
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
         }
-    }
 
-    function getCentralSectorIndex() {
-        const trackContainer = document.querySelector('.wheel-track');
-        if (!trackContainer) return -1;
-        const containerRect = trackContainer.getBoundingClientRect();
-        const centerX = containerRect.left + containerRect.width / 2;
-        const cards = document.querySelectorAll('.sector-card');
-        let bestIdx = -1;
-        let minDist = Infinity;
-        for (let i = 0; i < cards.length; i++) {
-            const rect = cards[i].getBoundingClientRect();
-            const cardCenter = rect.left + rect.width / 2;
-            const dist = Math.abs(cardCenter - centerX);
-            if (dist < minDist) {
-                minDist = dist;
-                bestIdx = i;
+        // ---------- DOM ЭЛЕМЕНТЫ ----------
+        const wheelStrip = document.getElementById('wheelStrip');
+        const spinBtn = document.getElementById('spinBtn');
+        const titleDisplay = document.getElementById('titleDisplay');
+        const brawlerDisplay = document.getElementById('brawlerDisplay');
+        const prestigeType = document.getElementById('prestigeType');
+        const resultCard = document.getElementById('resultCard');
+        const levelBtns = document.querySelectorAll('.level-btn');
+
+        let currentLevel = 'novice';
+        let flatSectors = buildSectorsForLevel(currentLevel);
+        let duplicatedSectors = [];
+        for (let i = 0; i < 15; i++) duplicatedSectors.push(...flatSectors);
+
+        const itemWidth = 188;
+        let currentTranslateX = 0;
+        let spinningActive = false;
+        let animFrame = null;
+        let spinStartTime = 0;
+        const spinDuration = 2000;
+        let startTranslate = 0;
+        let targetTranslate = 0;
+        let spinUsed = false;
+        let lastSelectedId = null;
+
+        function renderStrip() {
+            wheelStrip.innerHTML = '';
+            duplicatedSectors.forEach(sector => {
+                const card = document.createElement('div');
+                card.className = 'sector-card';
+                card.innerHTML = `
+                    <span class="title-text">${sector.title.length > 28 ? sector.title.slice(0,26)+'..' : sector.title}</span>
+                    <span class="brawler-mini">${sector.brawler}</span>
+                `;
+                wheelStrip.appendChild(card);
+            });
+            const startOffset = -(flatSectors.length * 7 * itemWidth);
+            wheelStrip.style.transform = `translateX(${startOffset}px)`;
+            currentTranslateX = startOffset;
+        }
+
+        function highlightCenterCard() {
+            const cards = document.querySelectorAll('.sector-card');
+            cards.forEach(c => c.classList.remove('highlight'));
+            const idx = getCentralSectorIndex();
+            if (idx !== -1 && cards[idx]) cards[idx].classList.add('highlight');
+        }
+
+        function getCentralSectorIndex() {
+            const track = document.querySelector('.wheel-track');
+            if (!track) return -1;
+            const rect = track.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const cards = document.querySelectorAll('.sector-card');
+            let best = -1, minDist = Infinity;
+            for (let i = 0; i < cards.length; i++) {
+                const cardRect = cards[i].getBoundingClientRect();
+                const cardCenter = cardRect.left + cardRect.width / 2;
+                const dist = Math.abs(cardCenter - centerX);
+                if (dist < minDist) { minDist = dist; best = i; }
+            }
+            return best;
+        }
+
+        function ensureRightSideFilled(centralIdx) {
+            const track = document.querySelector('.wheel-track');
+            if (!track) return false;
+            const containerRect = track.getBoundingClientRect();
+            const containerRight = containerRect.right;
+            const cards = document.querySelectorAll('.sector-card');
+            if (cards.length === 0) return false;
+            const centralCard = cards[centralIdx];
+            const centralRect = centralCard.getBoundingClientRect();
+            if (centralRect.right > containerRight - 10) {
+                currentTranslateX += flatSectors.length * itemWidth;
+                wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
+                return true;
+            }
+            let rightCount = 0;
+            for (let i = centralIdx + 1; i < cards.length; i++) {
+                if (cards[i].getBoundingClientRect().left < containerRight) rightCount++;
+                else break;
+            }
+            if (rightCount < 2) {
+                currentTranslateX += flatSectors.length * itemWidth;
+                wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
+                return true;
+            }
+            return false;
+        }
+
+        function updateResult() {
+            let idx = getCentralSectorIndex();
+            if (idx === -1 || !duplicatedSectors[idx]) return;
+            if (ensureRightSideFilled(idx)) idx = getCentralSectorIndex();
+            const sector = duplicatedSectors[idx];
+            titleDisplay.textContent = sector.title;
+            brawlerDisplay.textContent = `👤 ${sector.brawler}`;
+            prestigeType.textContent = sector.type;
+            lastSelectedId = sector.id;
+            highlightCenterCard();
+            resultCard.classList.add('glow-effect');
+            setTimeout(() => resultCard.classList.remove('glow-effect'), 500);
+        }
+
+        function snapToExactCenter() {
+            const idx = getCentralSectorIndex();
+            if (idx === -1) return;
+            const cards = document.querySelectorAll('.sector-card');
+            const targetCard = cards[idx];
+            const track = document.querySelector('.wheel-track');
+            const containerRect = track.getBoundingClientRect();
+            const cardRect = targetCard.getBoundingClientRect();
+            const containerCenter = containerRect.left + containerRect.width / 2;
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            currentTranslateX -= (cardCenter - containerCenter);
+            wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
+        }
+
+        function animateSpin(now) {
+            if (!spinningActive) return;
+            const elapsed = now - spinStartTime;
+            const t = Math.min(1, elapsed / spinDuration);
+            const ease = 1 - Math.pow(1 - t, 3);
+            const newX = startTranslate + (targetTranslate - startTranslate) * ease;
+            wheelStrip.style.transform = `translateX(${newX}px)`;
+            currentTranslateX = newX;
+            if (t < 1) {
+                animFrame = requestAnimationFrame(animateSpin);
+            } else {
+                wheelStrip.style.transform = `translateX(${targetTranslate}px)`;
+                currentTranslateX = targetTranslate;
+                spinningActive = false;
+                snapToExactCenter();
+                updateResult();
+                cancelAnimationFrame(animFrame);
+                animFrame = null;
             }
         }
-        return bestIdx;
-    }
 
-    // Проверяем, достаточно ли секторов справа от центрального
-    function ensureRightSideFilled(centralIdx) {
-        const trackContainer = document.querySelector('.wheel-track');
-        if (!trackContainer) return false;
-        const containerRect = trackContainer.getBoundingClientRect();
-        const containerRightEdge = containerRect.right;
-        
-        // Сколько карточек нужно, чтобы заполнить правую половину контейнера
-        // Будем проверять, что от центральной карточки вправо есть хотя бы 3 карточки
-        const cards = document.querySelectorAll('.sector-card');
-        if (cards.length === 0) return false;
-        
-        const centralCard = cards[centralIdx];
-        const centralRect = centralCard.getBoundingClientRect();
-        
-        // Если правая граница центральной карточки уже за пределами видимости справа — смещаем влево
-        if (centralRect.right > containerRightEdge - 10) {
-            // Сдвигаем на одну длину массива влево
-            currentTranslateX += flatSectors.length * itemWidth;
-            wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
-            // После сдвига нужно пересчитать центральный индекс
-            return true;
-        }
-        
-        // Дополнительно: если справа от центра меньше 2 карточек, тоже сдвигаем
-        let rightCount = 0;
-        for (let i = centralIdx + 1; i < cards.length; i++) {
-            const rect = cards[i].getBoundingClientRect();
-            if (rect.left < containerRightEdge) rightCount++;
-            else break;
-        }
-        if (rightCount < 2) {
-            currentTranslateX += flatSectors.length * itemWidth;
-            wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
-            return true;
-        }
-        return false;
-    }
-
-    function updateResultAndNearby() {
-        let idx = getCentralSectorIndex();
-        if (idx === -1 || !duplicatedSectors[idx]) return;
-
-        // Гарантируем, что справа есть карточки
-        if (ensureRightSideFilled(idx)) {
-            // Если произошёл сдвиг, пересчитываем индекс
-            idx = getCentralSectorIndex();
-        }
-
-        const sector = duplicatedSectors[idx];
-        titleDisplaySpan.innerHTML = sector.title;
-        brawlerDisplaySpan.innerHTML = `👤 ${sector.brawler}`;
-        prestigeTypeSpan.innerHTML = sector.type;
-        lastSelectedId = sector.id;
-
-        highlightCenterCard();
-
-        const leftIdx = idx > 0 ? idx - 1 : duplicatedSectors.length - 1;
-        const rightIdx = idx < duplicatedSectors.length - 1 ? idx + 1 : 0;
-
-        const leftSector = duplicatedSectors[leftIdx];
-        const rightSector = duplicatedSectors[rightIdx];
-
-        leftTitle.textContent = leftSector.title.length > 25 ? leftSector.title.slice(0,23)+'..' : leftSector.title;
-        leftBrawler.textContent = leftSector.brawler;
-        rightTitle.textContent = rightSector.title.length > 25 ? rightSector.title.slice(0,23)+'..' : rightSector.title;
-        rightBrawler.textContent = rightSector.brawler;
-
-        resultCardDiv.classList.add('glow-effect');
-        setTimeout(() => resultCardDiv.classList.remove('glow-effect'), 500);
-    }
-
-    function snapToExactCenter() {
-        const idx = getCentralSectorIndex();
-        if (idx === -1) return;
-        const cards = document.querySelectorAll('.sector-card');
-        const targetCard = cards[idx];
-        if (!targetCard) return;
-        const trackContainer = document.querySelector('.wheel-track');
-        const containerRect = trackContainer.getBoundingClientRect();
-        const cardRect = targetCard.getBoundingClientRect();
-        const containerCenter = containerRect.left + containerRect.width / 2;
-        const cardCenter = cardRect.left + cardRect.width / 2;
-        const delta = cardCenter - containerCenter;
-        currentTranslateX -= delta;
-        wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
-    }
-
-    function animateSpin(currentTime) {
-        if (!spinningActive) return;
-        const elapsed = currentTime - spinStartTime;
-        let t = Math.min(1, elapsed / spinDuration);
-        const easeOut = 1 - Math.pow(1 - t, 3);
-        const newX = startTranslate + (targetTranslate - startTranslate) * easeOut;
-        wheelStrip.style.transform = `translateX(${newX}px)`;
-        currentTranslateX = newX;
-        if (t < 1) {
-            animFrame = requestAnimationFrame(animateSpin);
-        } else {
-            wheelStrip.style.transform = `translateX(${targetTranslate}px)`;
-            currentTranslateX = targetTranslate;
-            spinningActive = false;
-            snapToExactCenter();
-            updateResultAndNearby();
-            cancelAnimationFrame(animFrame);
-            animFrame = null;
-        }
-    }
-
-    function getRandomTitleExcludingLast() {
-        if (flatSectors.length === 0) return null;
-        if (lastSelectedId === null) {
-            return flatSectors[Math.floor(Math.random() * flatSectors.length)];
-        }
-        const available = flatSectors.filter(s => s.id !== lastSelectedId);
-        if (available.length === 0) return flatSectors[Math.floor(Math.random() * flatSectors.length)];
-        return available[Math.floor(Math.random() * available.length)];
-    }
-
-    function spinWheel() {
-        if (spinningActive || spinUsed) return;
-
-        spinUsed = true;
-        spinBtn.disabled = true;
-
-        const targetSector = getRandomTitleExcludingLast();
-        if (!targetSector) return;
-
-        // Ищем сектор в 8-й копии (индекс 7) для удобства
-        let targetDuplicatedIndex = -1;
-        const startSearch = flatSectors.length * 7;
-        const endSearch = flatSectors.length * 8;
-        for (let i = startSearch; i < endSearch; i++) {
-            if (duplicatedSectors[i].id === targetSector.id) {
-                targetDuplicatedIndex = i;
-                break;
+        function spinWheel() {
+            if (spinningActive || spinUsed) return;
+            if (!flatSectors.length) {
+                alert('Нет доступных титулов для этого уровня!');
+                return;
             }
-        }
-        if (targetDuplicatedIndex === -1) {
-            for (let i = 0; i < duplicatedSectors.length; i++) {
+            spinUsed = true;
+            spinBtn.disabled = true;
+
+            const randomIndex = Math.floor(Math.random() * flatSectors.length);
+            const targetSector = flatSectors[randomIndex];
+            
+            let targetDuplicatedIndex = -1;
+            const startSearch = flatSectors.length * 7;
+            const endSearch = flatSectors.length * 8;
+            for (let i = startSearch; i < endSearch; i++) {
                 if (duplicatedSectors[i].id === targetSector.id) {
                     targetDuplicatedIndex = i;
                     break;
                 }
             }
+            if (targetDuplicatedIndex === -1) {
+                for (let i = 0; i < duplicatedSectors.length; i++) {
+                    if (duplicatedSectors[i].id === targetSector.id) {
+                        targetDuplicatedIndex = i;
+                        break;
+                    }
+                }
+            }
+            if (targetDuplicatedIndex === -1) return;
+
+            const track = document.querySelector('.wheel-track');
+            const cards = document.querySelectorAll('.sector-card');
+            const targetCard = cards[targetDuplicatedIndex];
+            const containerRect = track.getBoundingClientRect();
+            const cardRect = targetCard.getBoundingClientRect();
+            const containerCenter = containerRect.left + containerRect.width / 2;
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const desiredTranslate = currentTranslateX - (cardCenter - containerCenter);
+            const fullRotations = 5 + Math.floor(Math.random() * 6);
+            const extraShift = fullRotations * (flatSectors.length * itemWidth);
+            const finalTranslate = desiredTranslate - extraShift;
+
+            startTranslate = currentTranslateX;
+            targetTranslate = finalTranslate;
+            spinStartTime = performance.now();
+            spinningActive = true;
+
+            titleDisplay.textContent = "🌀 SPINNING... 🌀";
+            brawlerDisplay.textContent = "Крутим рулетку";
+            prestigeType.textContent = "⚡ СТАВКИ СДЕЛАНЫ ⚡";
+
+            if (animFrame) cancelAnimationFrame(animFrame);
+            animFrame = requestAnimationFrame(animateSpin);
         }
-        if (targetDuplicatedIndex === -1) return;
 
-        const trackContainer = document.querySelector('.wheel-track');
-        const cards = document.querySelectorAll('.sector-card');
-        if (!cards.length || !trackContainer) return;
-        const targetCard = cards[targetDuplicatedIndex];
-        if (!targetCard) return;
+        function setLevel(level) {
+            currentLevel = level;
+            flatSectors = buildSectorsForLevel(level);
+            duplicatedSectors = [];
+            for (let i = 0; i < 15; i++) duplicatedSectors.push(...flatSectors);
+            renderStrip();
+            spinUsed = false;
+            spinBtn.disabled = false;
+            titleDisplay.textContent = "—";
+            brawlerDisplay.textContent = "Выбери уровень и крути";
+            prestigeType.textContent = "✨ — ✨";
+            document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('highlight'));
+        }
 
-        const containerRect = trackContainer.getBoundingClientRect();
-        const cardRect = targetCard.getBoundingClientRect();
-        const containerCenter = containerRect.left + containerRect.width / 2;
-        const cardCenter = cardRect.left + cardRect.width / 2;
-        const delta = cardCenter - containerCenter;
-        const desiredTranslate = currentTranslateX - delta;
+        // Инициализация
+        levelBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                levelBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                setLevel(btn.dataset.level);
+            });
+        });
 
-        // Обороты: 5-10 полных кругов
-        const fullRotations = 5 + Math.floor(Math.random() * 6);
-        const extraShift = fullRotations * (flatSectors.length * itemWidth);
-        const finalTranslate = desiredTranslate - extraShift;
-
-        startTranslate = currentTranslateX;
-        targetTranslate = finalTranslate;
-        spinStartTime = performance.now();
-        spinningActive = true;
-
-        titleDisplaySpan.innerHTML = "🌀 SPINNING... 🌀";
-        brawlerDisplaySpan.innerHTML = "Крутим рулетку";
-        prestigeTypeSpan.innerHTML = "⚡ СТАВКИ СДЕЛАНЫ ⚡";
-        leftTitle.textContent = "—";
-        leftBrawler.textContent = "—";
-        rightTitle.textContent = "—";
-        rightBrawler.textContent = "—";
-
-        if (animFrame) cancelAnimationFrame(animFrame);
-        animFrame = requestAnimationFrame(animateSpin);
-    }
-
-    // Инициализация
-    renderStrip();
-    titleDisplaySpan.innerHTML = "—";
-    brawlerDisplaySpan.innerHTML = "Ожидание спина";
-    prestigeTypeSpan.innerHTML = "✨ ПРАЙМ I / ПРАЙМ III ✨";
-    leftTitle.textContent = "—";
-    leftBrawler.textContent = "—";
-    rightTitle.textContent = "—";
-    rightBrawler.textContent = "—";
-
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        if (spinningActive) return;
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
+        spinBtn.addEventListener('click', spinWheel);
+        window.addEventListener('resize', () => {
+            if (spinningActive) return;
             if (spinUsed) {
                 snapToExactCenter();
-                updateResultAndNearby();
+                updateResult();
             }
-        }, 100);
-    });
+        });
 
-    spinBtn.addEventListener('click', spinWheel);
+        setLevel('novice');
+    })();
 </script>
 </body>
 </html>
