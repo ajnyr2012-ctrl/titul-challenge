@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- Мета-теги (замени коды подтверждения) -->
+    <meta name="google-site-verification" content="5CFsYV-XFj7nXXSfMx-7vnY2Ya8aMfsh8dM52GANkOk" />
+    <meta name="yandex-verification" content="112c2d0d32174e24" />
     <meta name="description" content="Titul Challenge — крути рулетку титулов Brawl Stars! Выбери уровень сложности и испытай удачу.">
     <meta name="keywords" content="Brawl Stars, титулы, рулетка, престиж, игра, колесо фортуны">
-    <meta name="yandex-verification" content="КОД_ЯНДЕКСА_СЮДА" />
-    <meta name="google-site-verification" content="КОД_GOOGLE_СЮДА" />
     
     <title>Titul Challenge | Brawl Stars Wheel</title>
     
@@ -17,473 +16,129 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@700;800;900&family=Rajdhani:wght@500;600&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
+        * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
+        body { min-height:100vh; background:radial-gradient(circle at 20% 30%, #0a0f1a, #03060b); font-family:'Orbitron','Rajdhani','Poppins',sans-serif; display:flex; justify-content:center; align-items:center; padding:20px; position:relative; overflow-x:hidden; }
+        body::before { content:""; position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(0,255,255,0.02) 0px, rgba(0,255,255,0.02) 2px, transparent 2px, transparent 8px); pointer-events:none; z-index:0; }
+        .glow-orb { position:absolute; width:60vw; height:60vw; background:radial-gradient(circle, rgba(255,80,40,0.15), transparent 70%); top:-20%; right:-20%; border-radius:50%; filter:blur(60px); pointer-events:none; z-index:0; }
+        .container { max-width:1400px; width:100%; background:rgba(5,10,18,0.75); backdrop-filter:blur(12px); border-radius:64px; padding:24px 30px 40px; border:1px solid rgba(0,255,255,0.4); box-shadow:0 25px 45px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,215,0,0.2) inset, 0 0 20px rgba(0,255,255,0.2); position:relative; z-index:2; }
+        
+        #orientationOverlay {
+            display: none; position:fixed; top:0; left:0; width:100vw; height:100vh; background-color:#0a0f1a; z-index:9999;
+            justify-content:center; align-items:center; flex-direction:column; color:white; font-family:'Poppins',sans-serif; text-align:center;
+            backdrop-filter:blur(10px); pointer-events:all;
         }
+        #orientationOverlay svg { width:100px; height:100px; margin-bottom:20px; animation:rotatePhone 1.5s ease-in-out infinite; }
+        @keyframes rotatePhone { 0% { transform:rotate(0deg); } 50% { transform:rotate(90deg); } 100% { transform:rotate(90deg); } }
+        #orientationMessage { font-size:24px; font-weight:bold; color:#FFD966; text-shadow:0 0 10px #ff9900; margin-bottom:10px; }
+        #orientationSubMessage { font-size:16px; color:#aaa; }
 
-        body {
-            min-height: 100vh;
-            background: radial-gradient(circle at 20% 30%, #0a0f1a, #03060b);
-            font-family: 'Orbitron', 'Rajdhani', 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, rgba(0, 255, 255, 0.02) 0px, rgba(0, 255, 255, 0.02) 2px, transparent 2px, transparent 8px);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .glow-orb {
-            position: absolute;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, rgba(255, 80, 40, 0.15), transparent 70%);
-            top: -20%;
-            right: -20%;
-            border-radius: 50%;
-            filter: blur(60px);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            max-width: 1400px;
-            width: 100%;
-            background: rgba(5, 10, 18, 0.75);
-            backdrop-filter: blur(12px);
-            border-radius: 64px;
-            padding: 24px 30px 40px;
-            border: 1px solid rgba(0, 255, 255, 0.4);
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 215, 0, 0.2) inset, 0 0 20px rgba(0, 255, 255, 0.2);
-            transition: all 0.3s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .title-section {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 900;
-            font-size: 3.2rem;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #FFF3B0, #FFB347, #FF6A00, #FFD966);
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(255, 140, 0, 0.7);
-            margin: 0;
-            line-height: 1.2;
-            animation: textShift 5s infinite alternate;
-        }
-
-        @keyframes textShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        .main-layout {
-            display: flex;
-            flex-direction: row;
-            align-items: stretch;
-            gap: 20px;
-            margin: 20px 0 10px;
-        }
-
-        .wheel-area {
-            flex: 3;
-            min-width: 0;
-        }
-
-        /* Боковая панель — теперь выбор уровня */
-        .level-panel {
-            flex: 1;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            border-radius: 40px;
-            padding: 18px 12px;
-            border: 1px solid #ffb34780;
-            box-shadow: inset 0 0 15px #00000055, 0 8px 0 #0a0f1a;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .level-title {
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.4rem;
-            color: #FFD966;
-            text-shadow: 0 0 6px #ff9900;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-
-        .level-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .level-btn {
-            background: transparent;
-            border: 2px solid #ffb347;
-            color: #ffd966;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            padding: 16px 10px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            backdrop-filter: blur(4px);
-            background: rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .level-btn:hover {
-            background: rgba(255, 180, 71, 0.2);
-            box-shadow: 0 0 15px #ffb34780;
-        }
-
-        .level-btn.active {
-            background: #ffb347;
-            color: #0a0f1a;
-            box-shadow: 0 0 20px #ffb347;
-            border-color: #fff3b0;
-        }
-
-        .wheel-horizontal-container {
-            position: relative;
-            background: #010a12;
-            border-radius: 60px;
-            padding: 18px 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,200,0.2);
-            border: 1px solid #ffb34760;
-            margin: 20px 0;
-        }
-
-        .wheel-track {
-            overflow: hidden;
-            border-radius: 48px;
-            background: #0b121f;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
-            position: relative;
-            cursor: pointer;
-        }
-
-        .wheel-strip {
-            display: flex;
-            gap: 0;
-            will-change: transform;
-            transition: none;
-        }
-
-        .sector-card {
-            flex: 0 0 auto;
-            width: 180px;
-            background: linear-gradient(145deg, #1e2a2f, #0f191f);
-            margin: 0 4px;
-            border-radius: 36px;
-            padding: 16px 8px;
-            text-align: center;
-            border: 1px solid rgba(255, 200, 80, 0.5);
-            box-shadow: 0 8px 0 #00000055;
-            transition: border 0.2s, box-shadow 0.2s, transform 0.2s;
-            backdrop-filter: blur(4px);
-        }
-
-        .sector-card.highlight {
-            border: 3px solid #FFD966;
-            box-shadow: 0 0 20px #FFB347, 0 8px 0 #00000055;
-            transform: scale(1.02);
-            background: linear-gradient(145deg, #2a3a44, #14232b);
-        }
-
-        .sector-card span.title-text {
-            display: block;
-            font-weight: 800;
-            font-size: 1rem;
-            color: #FFE3A4;
-            text-shadow: 0 1px 2px black;
-            font-family: 'Poppins', sans-serif;
-            word-break: break-word;
-        }
-
-        .sector-card span.brawler-mini {
-            font-size: 0.7rem;
-            color: #8ac4ff;
-            font-weight: 500;
-            margin-top: 8px;
-            display: block;
-        }
-
-        .pointer-indicator {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            z-index: 25;
-            filter: drop-shadow(0 0 12px #ffaa00);
-            pointer-events: none;
-        }
-
-        .pointer-indicator svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .control-area {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0 20px;
-        }
-
-        .spin-btn {
-            background: radial-gradient(circle at 30% 20%, #ffbc6e, #e05a00);
-            border: none;
-            padding: 16px 44px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            font-family: 'Orbitron', monospace;
-            color: #fff0c0;
-            text-shadow: 0 2px 0 #722400;
-            border-radius: 80px;
-            cursor: pointer;
-            transition: 0.07s linear;
-            box-shadow: 0 12px 0 #8b3c00;
-            letter-spacing: 4px;
-        }
-
-        .spin-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 6px 0 #8b3c00;
-        }
-
-        .spin-btn:disabled {
-            opacity: 0.5;
-            transform: translateY(0);
-            filter: grayscale(0.5);
-            cursor: not-allowed;
-            background: radial-gradient(circle at 30% 20%, #8f8f8f, #5a5a5a);
-            box-shadow: 0 12px 0 #3a3a3a;
-            text-shadow: none;
-        }
-
-        .result-card {
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(16px);
-            border-radius: 48px;
-            padding: 18px 20px;
-            margin-top: 20px;
-            text-align: center;
-            border: 1px solid #ffbc6e;
-            box-shadow: 0 0 18px rgba(255, 100, 0, 0.3);
-        }
-
-        .result-label {
-            font-size: 0.8rem;
-            letter-spacing: 4px;
-            color: #ffcf8a;
-            font-weight: 500;
-        }
-
-        .title-name {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 900;
-            font-size: 2.2rem;
-            background: linear-gradient(135deg, #FFF5C2, #FFAA55);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            line-height: 1.2;
-            margin: 6px 0;
-        }
-
-        .brawler-name {
-            font-size: 1.25rem;
-            color: #bbddff;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .prestige-badge {
-            display: inline-block;
-            background: #1a1f1a;
-            padding: 6px 20px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-top: 12px;
-            color: #FFB347;
-            border-left: 4px solid gold;
-            font-family: monospace;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 0.65rem;
-            color: #5e7a5e;
-            margin-top: 28px;
-            opacity: 0.8;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .youtube-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #ff8888;
-            text-decoration: none;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 18px;
-            border-radius: 40px;
-            border: 1px solid #ff444480;
-            transition: all 0.2s;
-            backdrop-filter: blur(4px);
-        }
-
-        .youtube-link:hover {
-            background: rgba(255, 50, 50, 0.2);
-            border-color: #ff0000;
-            color: #ffaaaa;
-            box-shadow: 0 0 12px #ff000080;
-        }
-
-        @media (max-width: 900px) {
-            .main-layout {
-                flex-direction: column;
-            }
-            h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 760px) {
-            .container {
-                padding: 18px 12px 28px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .sector-card {
-                width: 140px;
-                padding: 12px 5px;
-            }
-            .level-btn {
-                font-size: 1.1rem;
-                padding: 12px 8px;
-            }
-            .spin-btn {
-                padding: 12px 28px;
-                font-size: 1.4rem;
-            }
-        }
-
-        .glow-effect {
-            animation: winFlash 0.4s cubic-bezier(0.2, 1.6, 0.4, 1);
-        }
-
-        @keyframes winFlash {
-            0% { text-shadow: 0 0 0px gold; transform: scale(1);}
-            50% { text-shadow: 0 0 20px #ffb347, 0 0 30px #ff7b00; transform: scale(1.02);}
-            100% { text-shadow: 0 0 0px gold; transform: scale(1);}
-        }
+        .lang-switch { position:absolute; top:20px; right:30px; display:flex; gap:10px; z-index:10; }
+        .lang-btn { background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); border:1px solid #ffb347; color:#ffd966; font-family:'Poppins',sans-serif; font-weight:700; font-size:1rem; padding:6px 16px; border-radius:30px; cursor:pointer; transition:all 0.2s; text-transform:uppercase; }
+        .lang-btn.active { background:#ffb347; color:#0a0f1a; box-shadow:0 0 12px #ffb347; }
+        
+        .title-section { text-align:center; margin-bottom:20px; }
+        h1 { font-family:'Poppins',sans-serif; font-weight:900; font-size:3.2rem; letter-spacing:2px; background:linear-gradient(135deg, #FFF3B0, #FFB347, #FF6A00, #FFD966); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; text-shadow:0 0 20px rgba(255,140,0,0.7); margin:0; line-height:1.2; animation:textShift 5s infinite alternate; }
+        @keyframes textShift { 0% { background-position:0% 50%; } 100% { background-position:100% 50%; } }
+        
+        .main-layout { display:flex; flex-direction:row; align-items:stretch; gap:20px; margin:20px 0 10px; }
+        .wheel-area { flex:3; min-width:0; }
+        .level-panel { flex:1; background:rgba(0,0,0,0.5); backdrop-filter:blur(8px); border-radius:40px; padding:18px 12px; border:1px solid #ffb34780; box-shadow:inset 0 0 15px #00000055, 0 8px 0 #0a0f1a; display:flex; flex-direction:column; }
+        .level-title { text-align:center; font-family:'Poppins',sans-serif; font-weight:700; font-size:1.4rem; color:#FFD966; text-shadow:0 0 6px #ff9900; margin-bottom:20px; letter-spacing:1px; }
+        .level-buttons { display:flex; flex-direction:column; gap:12px; flex:1; justify-content:center; }
+        .level-btn { background:transparent; border:2px solid #ffb347; color:#ffd966; font-family:'Poppins',sans-serif; font-weight:700; font-size:1.2rem; padding:14px 8px; border-radius:40px; cursor:pointer; transition:all 0.2s; text-transform:uppercase; letter-spacing:1.5px; backdrop-filter:blur(4px); background:rgba(0,0,0,0.3); text-align:center; }
+        .level-btn:hover { background:rgba(255,180,71,0.2); box-shadow:0 0 15px #ffb34780; }
+        .level-btn.active { background:#ffb347; color:#0a0f1a; box-shadow:0 0 20px #ffb347; border-color:#fff3b0; }
+        
+        .wheel-horizontal-container { position:relative; background:#010a12; border-radius:60px; padding:18px 12px; box-shadow:0 10px 25px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,200,0.2); border:1px solid #ffb34760; margin:20px 0; }
+        .wheel-track { overflow:hidden; border-radius:48px; background:#0b121f; box-shadow:inset 0 0 30px rgba(0,0,0,0.8); position:relative; cursor:pointer; }
+        .wheel-strip { display:flex; gap:0; will-change:transform; transition:none; }
+        .sector-card { flex:0 0 auto; width:180px; background:linear-gradient(145deg, #1e2a2f, #0f191f); margin:0 4px; border-radius:36px; padding:16px 8px; text-align:center; border:1px solid rgba(255,200,80,0.5); box-shadow:0 8px 0 #00000055; backdrop-filter:blur(4px); }
+        .sector-card.highlight { border:3px solid #FFD966; box-shadow:0 0 20px #FFB347, 0 8px 0 #00000055; transform:scale(1.02); background:linear-gradient(145deg, #2a3a44, #14232b); }
+        .sector-card span.title-text { display:block; font-weight:800; font-size:1rem; color:#FFE3A4; text-shadow:0 1px 2px black; font-family:'Poppins',sans-serif; word-break:break-word; }
+        .sector-card span.brawler-mini { font-size:0.7rem; color:#8ac4ff; font-weight:500; margin-top:8px; display:block; }
+        
+        .pointer-indicator { position:absolute; top:-30px; left:50%; transform:translateX(-50%); width:60px; height:60px; z-index:25; filter:drop-shadow(0 0 12px #ffaa00); pointer-events:none; }
+        .pointer-indicator svg { width:100%; height:100%; display:block; }
+        
+        .control-area { display:flex; justify-content:center; margin:30px 0 20px; }
+        .spin-btn { background:radial-gradient(circle at 30% 20%, #ffbc6e, #e05a00); border:none; padding:16px 44px; font-size:1.8rem; font-weight:bold; font-family:'Orbitron',monospace; color:#fff0c0; text-shadow:0 2px 0 #722400; border-radius:80px; cursor:pointer; box-shadow:0 12px 0 #8b3c00; letter-spacing:4px; }
+        .spin-btn:active { transform:translateY(4px); box-shadow:0 6px 0 #8b3c00; }
+        .spin-btn:disabled { opacity:0.5; transform:translateY(0); filter:grayscale(0.5); cursor:not-allowed; background:radial-gradient(circle at 30% 20%, #8f8f8f, #5a5a5a); box-shadow:0 12px 0 #3a3a3a; text-shadow:none; }
+        
+        .result-card { background:rgba(0,0,0,0.75); backdrop-filter:blur(16px); border-radius:48px; padding:18px 20px; margin-top:20px; text-align:center; border:1px solid #ffbc6e; box-shadow:0 0 18px rgba(255,100,0,0.3); }
+        .result-label { font-size:0.8rem; letter-spacing:4px; color:#ffcf8a; font-weight:500; }
+        .title-name { font-family:'Poppins',sans-serif; font-weight:900; font-size:2.2rem; background:linear-gradient(135deg, #FFF5C2, #FFAA55); -webkit-background-clip:text; background-clip:text; color:transparent; line-height:1.2; margin:6px 0; }
+        .brawler-name { font-size:1.25rem; color:#bbddff; font-weight:600; letter-spacing:1px; }
+        .prestige-badge { display:inline-block; background:#1a1f1a; padding:6px 20px; border-radius:40px; font-size:0.8rem; font-weight:bold; margin-top:12px; color:#FFB347; border-left:4px solid gold; font-family:monospace; }
+        
+        footer { text-align:center; font-size:0.65rem; color:#5e7a5e; margin-top:28px; opacity:0.8; display:flex; flex-direction:column; gap:8px; align-items:center; }
+        .youtube-link { display:inline-flex; align-items:center; gap:8px; color:#ff8888; text-decoration:none; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:600; background:rgba(255,255,255,0.05); padding:6px 18px; border-radius:40px; border:1px solid #ff444480; transition:all 0.2s; backdrop-filter:blur(4px); }
+        .youtube-link:hover { background:rgba(255,50,50,0.2); border-color:#ff0000; color:#ffaaaa; box-shadow:0 0 12px #ff000080; }
+        
+        @media (max-width:900px) { .main-layout { flex-direction:column; } h1 { font-size:2.5rem; } }
+        @media (max-width:760px) { .container { padding:18px 12px 28px; } h1 { font-size:2rem; } .sector-card { width:140px; padding:12px 5px; } .level-btn { font-size:1rem; padding:10px 6px; } .spin-btn { padding:12px 28px; font-size:1.4rem; } }
+        
+        .glow-effect { animation:winFlash 0.4s cubic-bezier(0.2,1.6,0.4,1); }
+        @keyframes winFlash { 0% { text-shadow:0 0 0px gold; transform:scale(1);} 50% { text-shadow:0 0 20px #ffb347, 0 0 30px #ff7b00; transform:scale(1.02);} 100% { text-shadow:0 0 0px gold; transform:scale(1);} }
     </style>
 </head>
 <body>
+<div id="orientationOverlay">
+    <svg viewBox="0 0 24 24" width="100" height="100" fill="none" stroke="#FFD966" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+        <path d="M8 4v16"></path><path d="M16 4v16"></path>
+    </svg>
+    <div id="orientationMessage">Пожалуйста, поверните устройство</div>
+    <div id="orientationSubMessage">Игра доступна только в альбомной ориентации</div>
+</div>
+
 <div class="glow-orb"></div>
 <div class="container">
-    <div class="title-section">
-        <h1>TITUL CHALLENGE</h1>
+    <div class="lang-switch">
+        <button class="lang-btn active" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="en">EN</button>
     </div>
 
+    <div class="title-section"><h1>TITUL CHALLENGE</h1></div>
     <div class="main-layout">
         <div class="wheel-area">
             <div class="wheel-horizontal-container">
                 <div class="pointer-indicator">
                     <svg viewBox="0 0 40 40" fill="none">
-                        <defs>
-                            <linearGradient id="arrowGrad" x1="20" y1="0" x2="20" y2="40">
-                                <stop offset="0%" stop-color="#FFF3B0"/>
-                                <stop offset="40%" stop-color="#FFB347"/>
-                                <stop offset="100%" stop-color="#FF4D00"/>
-                            </linearGradient>
-                            <filter id="glow">
-                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur"/>
-                                    <feMergeNode in="SourceGraphic"/>
-                                </feMerge>
-                            </filter>
-                        </defs>
+                        <defs><linearGradient id="arrowGrad" x1="20" y1="0" x2="20" y2="40"><stop offset="0%" stop-color="#FFF3B0"/><stop offset="40%" stop-color="#FFB347"/><stop offset="100%" stop-color="#FF4D00"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
                         <polygon points="20,4 30,32 20,28 10,32" fill="url(#arrowGrad)" filter="url(#glow)" stroke="#FFD966" stroke-width="1.5"/>
                         <circle cx="20" cy="36" r="2.5" fill="#FFD966" filter="url(#glow)"/>
                     </svg>
                 </div>
-                <div class="wheel-track" id="wheelTrack">
-                    <div class="wheel-strip" id="wheelStrip"></div>
-                </div>
+                <div class="wheel-track" id="wheelTrack"><div class="wheel-strip" id="wheelStrip"></div></div>
             </div>
-            <div class="control-area">
-                <button class="spin-btn" id="spinBtn">SPIN</button>
-            </div>
+            <div class="control-area"><button class="spin-btn" id="spinBtn">SPIN</button></div>
             <div class="result-card" id="resultCard">
-                <div class="result-label">🏅 ВЫПАВШИЙ ТИТУЛ 🏅</div>
+                <div class="result-label" data-i18n="result_label">🏅 ВЫПАВШИЙ ТИТУЛ 🏅</div>
                 <div class="title-name" id="titleDisplay">—</div>
-                <div class="brawler-name" id="brawlerDisplay">Выбери уровень и крути</div>
+                <div class="brawler-name" id="brawlerDisplay" data-i18n="choose_level">Выбери уровень и крути</div>
                 <div class="prestige-badge" id="prestigeType">✨ — ✨</div>
             </div>
         </div>
-
-        <!-- Боковая панель выбора уровня -->
         <div class="level-panel">
-            <div class="level-title">⚡ ВЫБЕРИ УРОВЕНЬ ⚡</div>
+            <div class="level-title" data-i18n="choose_level_title">⚡ ВЫБЕРИ УРОВЕНЬ ⚡</div>
             <div class="level-buttons">
-                <button class="level-btn active" data-level="novice">🔥 НОВИЧОК</button>
-                <button class="level-btn" data-level="master">⚡ МАСТЕР</button>
-                <button class="level-btn" data-level="old">💀 ОЛД</button>
+                <button class="level-btn active" data-level="novice" data-i18n="novice">🔥 НОВИЧОК</button>
+                <button class="level-btn" data-level="master" data-i18n="master">⚡ МАСТЕР</button>
+                <button class="level-btn" data-level="old" data-i18n="old">💀 ОЛД</button>
+                <button class="level-btn" data-level="oldplus" data-i18n="oldplus">💰 ОЛД+</button>
             </div>
-            <div style="margin-top: auto; font-size: 0.8rem; color: #aaa; text-align: center; padding-top: 15px;">
-                S/A • B/C • D/F
+            <div style="margin-top:auto; font-size:0.7rem; color:#aaa; text-align:center; padding-top:15px;">
+                <span data-i18n="novice_desc">S/A (I)</span> • 
+                <span data-i18n="master_desc">B/C (I+III)</span> • 
+                <span data-i18n="old_desc">D/F (III)</span> • 
+                <span data-i18n="oldplus_desc">Все (III)</span>
             </div>
         </div>
     </div>
-
     <footer>
         <div>🎮 Titul Challenge | Глобальная обнова с рангами</div>
-        <a class="youtube-link" href="https://www.youtube.com/@Shabsshnik" target="_blank">
-            🎥 Мой YouTube: @Shabsshnik
-        </a>
+        <a class="youtube-link" href="https://www.youtube.com/@Shabsshnik" target="_blank">🎥 Мой YouTube: @Shabsshnik</a>
     </footer>
 </div>
 
@@ -491,8 +146,23 @@
     (function(){
         "use strict";
 
-        // ---------- БАЗА ТИТУЛОВ ----------
-        const TITLES_LIBRARY = [
+        // ---------- ORIENTATION LOCK ----------
+        const orientationOverlay = document.getElementById('orientationOverlay');
+        function checkOrientation() {
+            if (window.innerHeight > window.innerWidth) {
+                orientationOverlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            } else {
+                orientationOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+        window.addEventListener('resize', checkOrientation);
+        window.addEventListener('orientationchange', function() { setTimeout(checkOrientation, 50); });
+        checkOrientation();
+
+        // ---------- БАЗА ТИТУЛОВ (РУССКИЙ) ----------
+        const TITLES_LIBRARY_RU = [
             { brawler: "Шелли", normal: "Некогда объяснять!", neon: "Фантастика" },
             { brawler: "Нита", normal: "Дикое сердце", neon: "Диковинка" },
             { brawler: "Кольт", normal: "Красавчик", neon: "ПИФ-ПАФ" },
@@ -510,7 +180,7 @@
             { brawler: "Дэррил", normal: "Пир-р-рат!", neon: "Капитан" },
             { brawler: "Пенни", normal: "Просоленная", neon: "Бунт" },
             { brawler: "Карл", normal: "Геолог", neon: "Гений" },
-            { brawler: "Джеки", normal: "#@%**", neon: "Тебе **!" },
+            { brawler: "Джеки", normal: "#@%**", neon: "Тебе ******!" },
             { brawler: "Гас", normal: "Потеряшка", neon: "С шариком" },
             { brawler: "Бо", normal: "В гармонии с природой", neon: "Главное — терпение!" },
             { brawler: "Эмз", normal: "#хейтеры", neon: "Хейтер" },
@@ -572,8 +242,15 @@
             { brawler: "Олли", normal: "Это база!", neon: "Скейтер" },
             { brawler: "Финкс", normal: "Время на ветер", neon: "Кошачий раб" },
             { brawler: "Луми", normal: "Хедбэнгинг", neon: "И тепло, и холодно" },
+            { brawler: "Чжэ Ён", normal: "Amor Fati", neon: "Работник месяца" },
+            { brawler: "Алли", normal: "Мимокрокодил", neon: "Сталкер" },
+            { brawler: "Мина", normal: "Ураган", neon: "Звезда танцпола" },
+            { brawler: "Зигги", normal: "Само совершенство", neon: "Громовержец" },
+            { brawler: "Джиджи", normal: "Марионетка", neon: "Балерина" },
+            { brawler: "Глоуберт", normal: "Днище", neon: "Хочу дружить" },
+            { brawler: "Наджия", normal: "Токсик", neon: "Змея" },
             { brawler: "Спайк", normal: "Один такой", neon: "Нет слов" },
-            { brawler: "Ворон", normal: "Токсик", neon: "Змея" },
+            { brawler: "Ворон", normal: "Кар-кар!", neon: "Главный босс" },
             { brawler: "Леон", normal: "Проныра", neon: "Вот я есть, а вот меня нет…" },
             { brawler: "Сэнди", normal: "Соня", neon: "Сплю" },
             { brawler: "Амбер", normal: "Зажигалка", neon: "Жгу!" },
@@ -584,174 +261,219 @@
             { brawler: "Кит", normal: "Мяу", neon: "Рыбовое" },
             { brawler: "Драко", normal: "Хозяин подземелья", neon: "Металлист" },
             { brawler: "Кэндзи", normal: "Самурай", neon: "Суши-мастер" },
-            { brawler: "Кадзэ", normal: "Писаю в бассейн", neon: "Плохой полицейский" },
-            { brawler: "Сириус", normal: "Ниндзя", neon: "Словно ветер" }
+            { brawler: "Пирс", normal: "Писаю в бассейн", neon: "Плохой полицейский" },
+            { brawler: "Кадзэ", normal: "Ниндзя", neon: "Словно ветер" },
+            { brawler: "Сириус", normal: "В изгнании", neon: "В тени" }
         ];
 
-        // ---------- РАНГИ БОЙЦОВ (по списку) ----------
+        // ---------- БАЗА ТИТУЛОВ (АНГЛИЙСКИЙ) ----------
+        const TITLES_LIBRARY_EN = [
+            { brawler: "Shelly", normal: "No Time to Explain!", neon: "Fantastic" },
+            { brawler: "Nita", normal: "The Untamed", neon: "Wild Child" },
+            { brawler: "Colt", normal: "The Pretty", neon: "Pew Pew" },
+            { brawler: "Bull", normal: "Bulldozer!", neon: "Unstoppable" },
+            { brawler: "Brock", normal: "Boom!", neon: "Do Not Resist" },
+            { brawler: "El Primo", normal: "El Luchador", neon: "Sin dolor, no hay gloria!" },
+            { brawler: "Barley", normal: "You Got Served!", neon: "Last Call" },
+            { brawler: "Poco", normal: "El Mariachi", neon: "Bard" },
+            { brawler: "Rosa", normal: "Touching Grass", neon: "Flower" },
+            { brawler: "Jessie", normal: "The Builder", neon: "I'll Fix It!" },
+            { brawler: "Dynamike", normal: "Birdie, birdie, birdie!", neon: "Mr. Bombastic" },
+            { brawler: "Tick", normal: "Where's My Head?", neon: "Hot Head" },
+            { brawler: "8-Bit", normal: "SYS 64738", neon: "You Lose!" },
+            { brawler: "Rico", normal: "The Lover", neon: "Ricochet" },
+            { brawler: "Darryl", normal: "Pirrrate!", neon: "Captain" },
+            { brawler: "Penny", normal: "The Salty", neon: "Riot" },
+            { brawler: "Carl", normal: "The Geologist", neon: "Genius" },
+            { brawler: "Jacky", normal: "#@%**", neon: "Screw You!" },
+            { brawler: "Gus", normal: "The Lost", neon: "With a Balloon" },
+            { brawler: "Bo", normal: "One with Nature", neon: "Patience is Key!" },
+            { brawler: "Emz", normal: "#Haters", neon: "Hater" },
+            { brawler: "Stu", normal: "Wicked", neon: "Scarecrow" },
+            { brawler: "Piper", normal: "The Sniper", neon: "Headshot Only" },
+            { brawler: "Pam", normal: "Your Mom", neon: "I Recycle Enemies" },
+            { brawler: "Frank", normal: "The Tank", neon: "Master of Lobotomy" },
+            { brawler: "Bibi", normal: "Cool Cat", neon: "Chewing Gum" },
+            { brawler: "Bea", normal: "Queen", neon: "Kind Soul" },
+            { brawler: "Nani", normal: "Nanny", neon: "You Okay?" },
+            { brawler: "Edgar", normal: "CEO of Brawl Stars", neon: "Easy" },
+            { brawler: "Griff", normal: "The Greedy", neon: "Need More Gold!" },
+            { brawler: "Grom", normal: "With One Left Hand!", neon: "Red Riding Hood" },
+            { brawler: "Bonnie", normal: "The Reckless", neon: "No Teeth" },
+            { brawler: "Gale", normal: "The Janitor", neon: "Retired" },
+            { brawler: "Colette", normal: "The Collector", neon: "Brawl Stars Forever!" },
+            { brawler: "Belle", normal: "Starr", neon: "Wanted" },
+            { brawler: "Ash", normal: "Trash Tier", neon: "Garbage" },
+            { brawler: "Lola", normal: "Drama Queen", neon: "Diva" },
+            { brawler: "Sam", normal: "In Your Face!", neon: "Beatdown" },
+            { brawler: "Mandy", normal: "Tough Cookie", neon: "Free Candy!" },
+            { brawler: "Maisie", normal: "Master of Disaster", neon: "Explosive Temper" },
+            { brawler: "Hank", normal: "Prawn Ready!", neon: "Small but Mighty" },
+            { brawler: "Pearl", normal: "Let Me Cook!", neon: "I Love Cookies" },
+            { brawler: "Larry & Lawrie", normal: "I am the Law!", neon: "Obey or Pay!" },
+            { brawler: "Angelo", normal: "Bloodthirsty", neon: "I Love Gossip" },
+            { brawler: "Berry", normal: "Unicorn", neon: "Good Night" },
+            { brawler: "Shade", normal: "Ghosted", neon: "Ignoring the Unworthy" },
+            { brawler: "Meeple", normal: "Cheater", neon: "My Game, My Rules!" },
+            { brawler: "Trank", normal: "Ant Puppeteer", neon: "WE ARE TRANK" },
+            { brawler: "Mortis", normal: "Creature of the Night", neon: "Harbinger of Doom" },
+            { brawler: "Tara", normal: "What's in the Cards?", neon: "I Change the Future" },
+            { brawler: "Gene", normal: "Talk to the Hand!", neon: "Abracadabra" },
+            { brawler: "Max", normal: "I AM SPEED!", neon: "Catch Me If You Can" },
+            { brawler: "Mr. P", normal: "The Boss", neon: "Big Bird" },
+            { brawler: "Sprout", normal: "Tree Hugger", neon: "With Love" },
+            { brawler: "Byron", normal: "The Sensational", neon: "You're Done" },
+            { brawler: "Squeak", normal: "Is an Accident", neon: "Stress Reliever" },
+            { brawler: "Lou", normal: "Is Here for You!", neon: "Freezer" },
+            { brawler: "Ruffs", normal: "Colonel", neon: "Good Dog" },
+            { brawler: "Buzz", normal: "Born Bad", neon: "Drink More Water" },
+            { brawler: "Fang", normal: "Sneaker Artist", neon: "Love Leg Day" },
+            { brawler: "Eve", normal: "Mother", neon: "Mommy" },
+            { brawler: "Janet", normal: "The Rocket", neon: "Big Sister" },
+            { brawler: "Otis", normal: "The Artist", neon: "Huh?" },
+            { brawler: "Buster", normal: "Blockbuster", neon: "Like in the Movies" },
+            { brawler: "Gray", normal: "The Shady", neon: "Shh!" },
+            { brawler: "R-T", normal: "The Watcher", neon: "Watching You" },
+            { brawler: "Willow", normal: "In Your Head!", neon: "Manipulator" },
+            { brawler: "Doug", normal: "Weiner", neon: "Chill, Bro" },
+            { brawler: "Chuck", normal: "The Maestro", neon: "Choo-Choo!" },
+            { brawler: "Charlie", normal: "The Amazing", neon: "Main Star" },
+            { brawler: "Mico", normal: "Am I a Joke to You?", neon: "Banana" },
+            { brawler: "Melodie", normal: "Fearless", neon: "Melody" },
+            { brawler: "Lily", normal: "Backstabber", neon: "Don't Turn Around" },
+            { brawler: "Clancy", normal: "Shell Shocked", neon: "No Mercy" },
+            { brawler: "Moe", normal: "Cheesy", neon: "Who Do You Think I Am?" },
+            { brawler: "Juju", normal: "Hexed", neon: "Wolf in Sheep's Clothing" },
+            { brawler: "Ollie", normal: "Based", neon: "Skater" },
+            { brawler: "Finx", normal: "Waste of Time", neon: "Cat Slave" },
+            { brawler: "Lumi", normal: "Headbanger", neon: "Hot and Cold" },
+            { brawler: "Jae-yong", normal: "Amor Fati", neon: "Employee of the Month" },
+            { brawler: "Allie", normal: "Croco-Dile", neon: "Stalker" },
+            { brawler: "Mina", normal: "Hurricane", neon: "Dancefloor Star" },
+            { brawler: "Ziggy", normal: "Perfection", neon: "Thunderer" },
+            { brawler: "Gigi", normal: "Marionette", neon: "Ballerina" },
+            { brawler: "Globbert", normal: "Bottom Tier", neon: "Wanna Be Friends" },
+            { brawler: "Najia", normal: "Toxic", neon: "Snake" },
+            { brawler: "Spike", normal: "One of a Kind", neon: "No Words" },
+            { brawler: "Crow", normal: "Caw caw!", neon: "Big Boss" },
+            { brawler: "Leon", normal: "The Sneaky", neon: "Now You See Me..." },
+            { brawler: "Sandy", normal: "The Sleepy", neon: "Asleep" },
+            { brawler: "Amber", normal: "Fire Starter", neon: "Burning!" },
+            { brawler: "Meg", normal: "Tech Support 2.0", neon: "Heavy Metal" },
+            { brawler: "Volt", normal: "Bro", neon: "Electrician" },
+            { brawler: "Chester", normal: "Jack of all Trades", neon: "Joker" },
+            { brawler: "Cordelius", normal: "Toxic", neon: "Mushroom Keeper" },
+            { brawler: "Kit", normal: "Meow", neon: "Fishy" },
+            { brawler: "Draco", normal: "Dungeon Master", neon: "Metalhead" },
+            { brawler: "Kenji", normal: "Samurai", neon: "Sushi Master" },
+            { brawler: "Pierce", normal: "Peeing in the Pool", neon: "Bad Cop" },
+            { brawler: "Kaze", normal: "Ninja", neon: "Like the Wind" },
+            { brawler: "Sirius", normal: "In Exile", neon: "In the Shadows" }
+        ];
+
+        let TITLES_LIBRARY = TITLES_LIBRARY_RU;
+
+        // ---------- РАНГИ (ключи — только русские имена) ----------
         const rankMap = new Map();
-        // S
-        ['Мортис','Нани','Булл','Ворон','Кольт','Леон','Биби'].forEach(b => rankMap.set(b, 'S'));
-        // A
-        ['Клэнси','Спайк','Честер','Сириус','Базз','Эмз','Брок'].forEach(b => rankMap.set(b, 'A'));
-        // B
-        ['Мелоди','Мэнди','Бо','Беа','Рико','Кадзэ','Шелли','Мэйси','Сту','Мипл','Байрон','Пайпер','Белль','Фрэнк','Джин','Джанет','Лола','Джуджу','Бонни','Джесси','Нита','Отис','Эдгар','Бастер','Лили'].forEach(b => rankMap.set(b, 'B'));
-        // C
-        ['Анджело','Роза','Даг','Финкс','Пенни','Скуик','Перл','Кэндзи','Корделиус','Мэг','Мо','Чарли','Лу','R-T','Джеки','Фэнг','Пэм','Гас','8-БИТ','Транк','Сэнди','Поко'].forEach(b => rankMap.set(b, 'C'));
-        // D
-        ['Амбер','Эш','Ева','Макс','Луми','Шейд','Карл','Мистер П.','Тик','Хэнк','Мико','Эль Примо','Драко','Гэйл'].forEach(b => rankMap.set(b, 'D'));
-        // F
-        ['Нани','Грей','Дэррил','Грифф','Тара','Олли','Динамайк','Сэм','Колетт','Ларри и Лори','Виллоу','Спраут','Гром','Берри','Барли','Чак'].forEach(b => rankMap.set(b, 'F'));
+        ['Шелли','Кольт','Булл','Брок','Эль Примо','Барли','Поко','Роза','Джесси'].forEach(b => rankMap.set(b, 'S'));
+        ['Динамайк','Тик','8-БИТ','Рико','Дэррил','Пенни','Карл','Джеки','Гас','Бо','Эмз'].forEach(b => rankMap.set(b, 'A'));
+        ['Сту','Пайпер','Пэм','Фрэнк','Биби','Беа','Нани','Эдгар','Грифф','Гром','Бонни','Гэйл','Колетт','Белль','Эш','Лола','Сэм','Мэнди','Мэйси','Хэнк','Перл','Ларри и Лори','Анджело','Берри','Шейд','Мипл','Транк'].forEach(b => rankMap.set(b, 'B'));
+        ['Мортис','Тара','Джин','Макс','Мистер П.','Спраут','Байрон','Скуик','Лу','Гавс','Базз','Фэнг','Ева','Джанет','Отис','Бастер','Грей','R-T','Виллоу','Даг','Чак','Чарли','Мико','Мелоди','Лили','Клэнси','Мо','Джуджу','Олли','Финкс','Луми','Чжэ Ён','Алли','Мина','Зигги','Джиджи','Глоуберт','Наджия'].forEach(b => rankMap.set(b, 'C'));
+        ['Спайк','Ворон','Леон','Сэнди','Амбер','Мэг','Вольт','Честер','Корделиус','Кит','Драко','Кэндзи','Пирс','Кадзэ','Сириус'].forEach(b => rankMap.set(b, 'D'));
+        TITLES_LIBRARY_RU.forEach(entry => { if(!rankMap.has(entry.brawler)) rankMap.set(entry.brawler, 'F'); });
 
-        // Защита от отсутствующих
-        TITLES_LIBRARY.forEach(entry => {
-            if (!rankMap.has(entry.brawler)) rankMap.set(entry.brawler, 'F');
-        });
-
-        // ---------- ГЕНЕРАЦИЯ СЕКТОРОВ ПО УРОВНЮ ----------
-        function buildSectorsForLevel(level) {
-            const sectors = [];
-            TITLES_LIBRARY.forEach(entry => {
-                const rank = rankMap.get(entry.brawler);
-                let includeNormal = false;
-                let includeNeon = false;
-
-                if (level === 'novice') {
-                    if (rank === 'S' || rank === 'A') includeNormal = true;
-                } else if (level === 'master') {
-                    if (rank === 'B' || rank === 'C') {
-                        includeNormal = true;
-                        includeNeon = true;
-                    }
-                } else if (level === 'old') {
-                    if (rank === 'D' || rank === 'F') {
-                        includeNeon = true;   // ТОЛЬКО третий прайм
-                    }
-                }
-
-                if (includeNormal) {
-                    sectors.push({
-                        id: `${entry.brawler}_normal_${level}`,
-                        title: entry.normal,
-                        brawler: entry.brawler,
-                        type: "🏆 ПРАЙМ I (Мастерство) 🏆"
-                    });
-                }
-                if (includeNeon) {
-                    sectors.push({
-                        id: `${entry.brawler}_neon_${level}`,
-                        title: entry.neon,
-                        brawler: entry.brawler,
-                        type: "✨ ПРАЙМ III (Неоновый престиж) ✨"
-                    });
-                }
-            });
-            return shuffleArray(sectors);
-        }
-
-        function shuffleArray(arr) {
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
+        // ---------- ПЕРЕВОДЫ ----------
+        const i18n = {
+            ru: { 
+                result_label: '🏅 ВЫПАВШИЙ ТИТУЛ 🏅', choose_level: 'Выбери уровень и крути', 
+                choose_level_title: '⚡ ВЫБЕРИ УРОВЕНЬ ⚡', 
+                novice: '🔥 НОВИЧОК', master: '⚡ МАСТЕР', old: '💀 ОЛД', oldplus: '💰 ОЛД+',
+                novice_desc: 'S/A (I)', master_desc: 'B/C (I+III)', old_desc: 'D/F (III)', oldplus_desc: 'Все (III)',
+                spin: 'SPIN', spinning: '🌀 КРУТИМ...', waiting: 'Ожидание спина', stakes: '⚡ СТАВКИ СДЕЛАНЫ ⚡'
+            },
+            en: { 
+                result_label: '🏅 YOUR TITLE 🏅', choose_level: 'Choose level and spin', 
+                choose_level_title: '⚡ SELECT LEVEL ⚡', 
+                novice: '🔥 NOVICE', master: '⚡ MASTER', old: '💀 OLD', oldplus: '💰 OLD+',
+                novice_desc: 'S/A (I)', master_desc: 'B/C (I+III)', old_desc: 'D/F (III)', oldplus_desc: 'All (III)',
+                spin: 'SPIN', spinning: '🌀 SPINNING...', waiting: 'Waiting for spin', stakes: '⚡ BETS ARE MADE ⚡'
             }
-            return arr;
-        }
+        };
+        let currentLang = 'ru';
 
-        // ---------- DOM ЭЛЕМЕНТЫ ----------
-        const wheelStrip = document.getElementById('wheelStrip');
-        const spinBtn = document.getElementById('spinBtn');
-        const titleDisplay = document.getElementById('titleDisplay');
-        const brawlerDisplay = document.getElementById('brawlerDisplay');
-        const prestigeType = document.getElementById('prestigeType');
-        const resultCard = document.getElementById('resultCard');
-        const levelBtns = document.querySelectorAll('.level-btn');
+        // DOM элементы
+        const wheelStrip = document.getElementById('wheelStrip'), spinBtn = document.getElementById('spinBtn');
+        const titleDisplay = document.getElementById('titleDisplay'), brawlerDisplay = document.getElementById('brawlerDisplay');
+        const prestigeType = document.getElementById('prestigeType'), resultCard = document.getElementById('resultCard');
+        const levelBtns = document.querySelectorAll('.level-btn'), langBtns = document.querySelectorAll('.lang-btn');
 
         let currentLevel = 'novice';
         let flatSectors = buildSectorsForLevel(currentLevel);
         let duplicatedSectors = [];
-        for (let i = 0; i < 15; i++) duplicatedSectors.push(...flatSectors);
+        for(let i=0; i<15; i++) duplicatedSectors.push(...flatSectors);
 
         const itemWidth = 188;
-        let currentTranslateX = 0;
-        let spinningActive = false;
-        let animFrame = null;
-        let spinStartTime = 0;
-        const spinDuration = 2000;
-        let startTranslate = 0;
-        let targetTranslate = 0;
-        let spinUsed = false;
-        let lastSelectedId = null;
+        let currentTranslateX = 0, spinningActive = false, animFrame = null, spinStartTime = 0, spinDuration = 2000,
+            startTranslate = 0, targetTranslate = 0, spinUsed = false, lastSelectedId = null;
 
-        function renderStrip() {
+        function buildSectorsForLevel(level) {
+            const sectors = [];
+            TITLES_LIBRARY.forEach((entry, index) => {
+                const ruEntry = TITLES_LIBRARY_RU[index];
+                const rank = rankMap.get(ruEntry.brawler) || 'F';
+                let includeNormal = false, includeNeon = false;
+                if (level === 'novice') { if (rank === 'S' || rank === 'A') includeNormal = true; }
+                else if (level === 'master') { if (rank === 'B' || rank === 'C') { includeNormal = true; includeNeon = true; } }
+                else if (level === 'old') { if (rank === 'D' || rank === 'F') includeNeon = true; }
+                else if (level === 'oldplus') { includeNeon = true; } // любой боец, только третий прайм
+                
+                if (includeNormal) sectors.push({ 
+                    id: ruEntry.brawler+'_normal_'+level, title: entry.normal, brawler: entry.brawler, 
+                    type: currentLang === 'ru' ? "🏆 ПРАЙМ I (Мастерство) 🏆" : "🏆 PRIME I (Mastery) 🏆" 
+                });
+                if (includeNeon) sectors.push({ 
+                    id: ruEntry.brawler+'_neon_'+level, title: entry.neon, brawler: entry.brawler, 
+                    type: currentLang === 'ru' ? "✨ ПРАЙМ III (Неоновый престиж) ✨" : "✨ PRIME III (Neon Prestige) ✨" 
+                });
+            });
+            return shuffleArray(sectors);
+        }
+        function shuffleArray(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+        function renderStrip(){
             wheelStrip.innerHTML = '';
-            duplicatedSectors.forEach(sector => {
-                const card = document.createElement('div');
-                card.className = 'sector-card';
-                card.innerHTML = `
-                    <span class="title-text">${sector.title.length > 28 ? sector.title.slice(0,26)+'..' : sector.title}</span>
-                    <span class="brawler-mini">${sector.brawler}</span>
-                `;
-                wheelStrip.appendChild(card);
+            duplicatedSectors.forEach(s => {
+                const c = document.createElement('div'); c.className = 'sector-card';
+                c.innerHTML = `<span class="title-text">${s.title.length>28?s.title.slice(0,26)+'..':s.title}</span><span class="brawler-mini">${s.brawler}</span>`;
+                wheelStrip.appendChild(c);
             });
             const startOffset = -(flatSectors.length * 7 * itemWidth);
-            wheelStrip.style.transform = `translateX(${startOffset}px)`;
-            currentTranslateX = startOffset;
+            wheelStrip.style.transform = `translateX(${startOffset}px)`; currentTranslateX = startOffset;
         }
 
-        function highlightCenterCard() {
-            const cards = document.querySelectorAll('.sector-card');
-            cards.forEach(c => c.classList.remove('highlight'));
-            const idx = getCentralSectorIndex();
-            if (idx !== -1 && cards[idx]) cards[idx].classList.add('highlight');
-        }
-
-        function getCentralSectorIndex() {
-            const track = document.querySelector('.wheel-track');
-            if (!track) return -1;
-            const rect = track.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const cards = document.querySelectorAll('.sector-card');
-            let best = -1, minDist = Infinity;
-            for (let i = 0; i < cards.length; i++) {
-                const cardRect = cards[i].getBoundingClientRect();
-                const cardCenter = cardRect.left + cardRect.width / 2;
-                const dist = Math.abs(cardCenter - centerX);
-                if (dist < minDist) { minDist = dist; best = i; }
-            }
+        function getCentralSectorIndex(){
+            const track = document.querySelector('.wheel-track'); if(!track) return -1;
+            const rect = track.getBoundingClientRect(), centerX = rect.left + rect.width/2;
+            const cards = document.querySelectorAll('.sector-card'); let best=-1, min=Infinity;
+            for(let i=0;i<cards.length;i++){ const cr=cards[i].getBoundingClientRect(), cc=cr.left+cr.width/2, d=Math.abs(cc-centerX); if(d<min){ min=d; best=i; } }
             return best;
         }
 
-        function ensureRightSideFilled(centralIdx) {
-            const track = document.querySelector('.wheel-track');
-            if (!track) return false;
-            const containerRect = track.getBoundingClientRect();
-            const containerRight = containerRect.right;
-            const cards = document.querySelectorAll('.sector-card');
-            if (cards.length === 0) return false;
-            const centralCard = cards[centralIdx];
-            const centralRect = centralCard.getBoundingClientRect();
-            if (centralRect.right > containerRight - 10) {
-                currentTranslateX += flatSectors.length * itemWidth;
-                wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
-                return true;
-            }
+        function ensureRightSideFilled(centralIdx){
+            const track = document.querySelector('.wheel-track'); if(!track) return false;
+            const containerRect = track.getBoundingClientRect(), containerRight = containerRect.right;
+            const cards = document.querySelectorAll('.sector-card'); if(!cards.length) return false;
+            const centralCard = cards[centralIdx], centralRect = centralCard.getBoundingClientRect();
+            if(centralRect.right > containerRight - 10){ currentTranslateX += flatSectors.length * itemWidth; wheelStrip.style.transform = `translateX(${currentTranslateX}px)`; return true; }
             let rightCount = 0;
-            for (let i = centralIdx + 1; i < cards.length; i++) {
-                if (cards[i].getBoundingClientRect().left < containerRight) rightCount++;
-                else break;
-            }
-            if (rightCount < 2) {
-                currentTranslateX += flatSectors.length * itemWidth;
-                wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
-                return true;
-            }
+            for(let i=centralIdx+1; i<cards.length; i++){ if(cards[i].getBoundingClientRect().left < containerRight) rightCount++; else break; }
+            if(rightCount < 2){ currentTranslateX += flatSectors.length * itemWidth; wheelStrip.style.transform = `translateX(${currentTranslateX}px)`; return true; }
             return false;
         }
 
-        function updateResult() {
-            let idx = getCentralSectorIndex();
-            if (idx === -1 || !duplicatedSectors[idx]) return;
-            if (ensureRightSideFilled(idx)) idx = getCentralSectorIndex();
+        function updateResult(){
+            let idx = getCentralSectorIndex(); if(idx===-1||!duplicatedSectors[idx]) return;
+            if(ensureRightSideFilled(idx)) idx = getCentralSectorIndex();
             const sector = duplicatedSectors[idx];
             titleDisplay.textContent = sector.title;
             brawlerDisplay.textContent = `👤 ${sector.brawler}`;
@@ -759,133 +481,106 @@
             lastSelectedId = sector.id;
             highlightCenterCard();
             resultCard.classList.add('glow-effect');
-            setTimeout(() => resultCard.classList.remove('glow-effect'), 500);
+            setTimeout(()=>resultCard.classList.remove('glow-effect'),500);
         }
-
-        function snapToExactCenter() {
-            const idx = getCentralSectorIndex();
-            if (idx === -1) return;
+        function highlightCenterCard(){
             const cards = document.querySelectorAll('.sector-card');
-            const targetCard = cards[idx];
-            const track = document.querySelector('.wheel-track');
-            const containerRect = track.getBoundingClientRect();
-            const cardRect = targetCard.getBoundingClientRect();
-            const containerCenter = containerRect.left + containerRect.width / 2;
-            const cardCenter = cardRect.left + cardRect.width / 2;
+            cards.forEach(c=>c.classList.remove('highlight'));
+            const idx = getCentralSectorIndex();
+            if(idx!==-1&&cards[idx]) cards[idx].classList.add('highlight');
+        }
+        function snapToExactCenter(){
+            const idx = getCentralSectorIndex(); if(idx===-1) return;
+            const cards = document.querySelectorAll('.sector-card'), targetCard = cards[idx];
+            const track = document.querySelector('.wheel-track'), containerRect = track.getBoundingClientRect(),
+                  cardRect = targetCard.getBoundingClientRect(),
+                  containerCenter = containerRect.left + containerRect.width/2,
+                  cardCenter = cardRect.left + cardRect.width/2;
             currentTranslateX -= (cardCenter - containerCenter);
             wheelStrip.style.transform = `translateX(${currentTranslateX}px)`;
         }
 
-        function animateSpin(now) {
-            if (!spinningActive) return;
-            const elapsed = now - spinStartTime;
-            const t = Math.min(1, elapsed / spinDuration);
-            const ease = 1 - Math.pow(1 - t, 3);
+        function animateSpin(now){
+            if(!spinningActive) return;
+            const elapsed = now - spinStartTime, t = Math.min(1, elapsed/spinDuration), ease = 1 - Math.pow(1-t,3);
             const newX = startTranslate + (targetTranslate - startTranslate) * ease;
-            wheelStrip.style.transform = `translateX(${newX}px)`;
-            currentTranslateX = newX;
-            if (t < 1) {
-                animFrame = requestAnimationFrame(animateSpin);
-            } else {
-                wheelStrip.style.transform = `translateX(${targetTranslate}px)`;
-                currentTranslateX = targetTranslate;
-                spinningActive = false;
-                snapToExactCenter();
-                updateResult();
-                cancelAnimationFrame(animFrame);
-                animFrame = null;
+            wheelStrip.style.transform = `translateX(${newX}px)`; currentTranslateX = newX;
+            if(t < 1) animFrame = requestAnimationFrame(animateSpin);
+            else {
+                wheelStrip.style.transform = `translateX(${targetTranslate}px)`; currentTranslateX = targetTranslate;
+                spinningActive = false; snapToExactCenter(); updateResult();
+                cancelAnimationFrame(animFrame); animFrame = null;
             }
         }
 
-        function spinWheel() {
-            if (spinningActive || spinUsed) return;
-            if (!flatSectors.length) {
-                alert('Нет доступных титулов для этого уровня!');
-                return;
-            }
-            spinUsed = true;
-            spinBtn.disabled = true;
-
-            const randomIndex = Math.floor(Math.random() * flatSectors.length);
-            const targetSector = flatSectors[randomIndex];
-            
+        function spinWheel(){
+            if(spinningActive || spinUsed) return;
+            if(!flatSectors.length){ alert(currentLang === 'ru' ? 'Нет доступных титулов!' : 'No titles available!'); return; }
+            spinUsed = true; spinBtn.disabled = true;
+            const randomIndex = Math.floor(Math.random() * flatSectors.length), targetSector = flatSectors[randomIndex];
             let targetDuplicatedIndex = -1;
-            const startSearch = flatSectors.length * 7;
-            const endSearch = flatSectors.length * 8;
-            for (let i = startSearch; i < endSearch; i++) {
-                if (duplicatedSectors[i].id === targetSector.id) {
-                    targetDuplicatedIndex = i;
-                    break;
-                }
-            }
-            if (targetDuplicatedIndex === -1) {
-                for (let i = 0; i < duplicatedSectors.length; i++) {
-                    if (duplicatedSectors[i].id === targetSector.id) {
-                        targetDuplicatedIndex = i;
-                        break;
-                    }
-                }
-            }
-            if (targetDuplicatedIndex === -1) return;
-
-            const track = document.querySelector('.wheel-track');
-            const cards = document.querySelectorAll('.sector-card');
-            const targetCard = cards[targetDuplicatedIndex];
-            const containerRect = track.getBoundingClientRect();
-            const cardRect = targetCard.getBoundingClientRect();
-            const containerCenter = containerRect.left + containerRect.width / 2;
-            const cardCenter = cardRect.left + cardRect.width / 2;
-            const desiredTranslate = currentTranslateX - (cardCenter - containerCenter);
-            const fullRotations = 5 + Math.floor(Math.random() * 6);
-            const extraShift = fullRotations * (flatSectors.length * itemWidth);
-            const finalTranslate = desiredTranslate - extraShift;
-
-            startTranslate = currentTranslateX;
-            targetTranslate = finalTranslate;
-            spinStartTime = performance.now();
-            spinningActive = true;
-
-            titleDisplay.textContent = "🌀 SPINNING... 🌀";
-            brawlerDisplay.textContent = "Крутим рулетку";
-            prestigeType.textContent = "⚡ СТАВКИ СДЕЛАНЫ ⚡";
-
-            if (animFrame) cancelAnimationFrame(animFrame);
+            const startSearch = flatSectors.length * 7, endSearch = flatSectors.length * 8;
+            for(let i=startSearch; i<endSearch; i++) if(duplicatedSectors[i].id === targetSector.id){ targetDuplicatedIndex = i; break; }
+            if(targetDuplicatedIndex === -1) for(let i=0; i<duplicatedSectors.length; i++) if(duplicatedSectors[i].id === targetSector.id){ targetDuplicatedIndex = i; break; }
+            if(targetDuplicatedIndex === -1) return;
+            const track = document.querySelector('.wheel-track'), cards = document.querySelectorAll('.sector-card'), targetCard = cards[targetDuplicatedIndex];
+            const containerRect = track.getBoundingClientRect(), cardRect = targetCard.getBoundingClientRect(),
+                  containerCenter = containerRect.left + containerRect.width/2, cardCenter = cardRect.left + cardRect.width/2,
+                  desiredTranslate = currentTranslateX - (cardCenter - containerCenter),
+                  fullRotations = 5 + Math.floor(Math.random()*6), extraShift = fullRotations * (flatSectors.length * itemWidth),
+                  finalTranslate = desiredTranslate - extraShift;
+            startTranslate = currentTranslateX; targetTranslate = finalTranslate; spinStartTime = performance.now(); spinningActive = true;
+            titleDisplay.textContent = i18n[currentLang].spinning;
+            brawlerDisplay.textContent = i18n[currentLang].waiting;
+            prestigeType.textContent = i18n[currentLang].stakes;
+            if(animFrame) cancelAnimationFrame(animFrame);
             animFrame = requestAnimationFrame(animateSpin);
         }
 
-        function setLevel(level) {
+        function setLevel(level){
             currentLevel = level;
             flatSectors = buildSectorsForLevel(level);
             duplicatedSectors = [];
-            for (let i = 0; i < 15; i++) duplicatedSectors.push(...flatSectors);
+            for(let i=0; i<15; i++) duplicatedSectors.push(...flatSectors);
             renderStrip();
-            spinUsed = false;
-            spinBtn.disabled = false;
+            spinUsed = false; spinBtn.disabled = false;
             titleDisplay.textContent = "—";
-            brawlerDisplay.textContent = "Выбери уровень и крути";
+            brawlerDisplay.textContent = i18n[currentLang].choose_level;
             prestigeType.textContent = "✨ — ✨";
-            document.querySelectorAll('.sector-card').forEach(c => c.classList.remove('highlight'));
+            document.querySelectorAll('.sector-card').forEach(c=>c.classList.remove('highlight'));
         }
 
-        // Инициализация
-        levelBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                levelBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                setLevel(btn.dataset.level);
+        function applyLanguage(lang){
+            currentLang = lang;
+            TITLES_LIBRARY = (lang === 'ru') ? TITLES_LIBRARY_RU : TITLES_LIBRARY_EN;
+            document.querySelectorAll('[data-i18n]').forEach(el => { 
+                const key = el.dataset.i18n; 
+                if (i18n[lang][key]) el.textContent = i18n[lang][key]; 
             });
-        });
+            spinBtn.textContent = i18n[lang].spin;
+            if(!spinUsed) brawlerDisplay.textContent = i18n[lang].choose_level;
+            flatSectors = buildSectorsForLevel(currentLevel);
+            duplicatedSectors = [];
+            for(let i=0; i<15; i++) duplicatedSectors.push(...flatSectors);
+            renderStrip();
+            if(spinUsed) updateResult();
+        }
 
+        levelBtns.forEach(btn => btn.addEventListener('click', ()=>{ 
+            levelBtns.forEach(b=>b.classList.remove('active')); 
+            btn.classList.add('active'); 
+            setLevel(btn.dataset.level); 
+        }));
         spinBtn.addEventListener('click', spinWheel);
-        window.addEventListener('resize', () => {
-            if (spinningActive) return;
-            if (spinUsed) {
-                snapToExactCenter();
-                updateResult();
-            }
-        });
-
+        window.addEventListener('resize', ()=>{ if(spinningActive) return; if(spinUsed){ snapToExactCenter(); updateResult(); } });
+        langBtns.forEach(btn => btn.addEventListener('click', ()=>{ 
+            const lang = btn.dataset.lang; 
+            langBtns.forEach(b=>b.classList.remove('active')); 
+            btn.classList.add('active'); 
+            applyLanguage(lang); 
+        }));
         setLevel('novice');
+        applyLanguage('ru');
     })();
 </script>
 </body>
