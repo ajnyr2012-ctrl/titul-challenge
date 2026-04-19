@@ -32,6 +32,32 @@
         #orientationMessage { font-size:24px; font-weight:bold; color:#FFD966; text-shadow:0 0 10px #ff9900; margin-bottom:10px; }
         #orientationSubMessage { font-size:16px; color:#aaa; }
 
+        /* Кнопки в шапке */
+        .header-buttons {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 15;
+        }
+        .meta-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            border: none;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #4a235a, 0 0 15px #9b59b680;
+            letter-spacing: 2px;
+            transition: 0.1s;
+            border: 1px solid #d2b4de;
+        }
+        .meta-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #4a235a, 0 0 20px #9b59b6; }
+
         .lang-switch { position:absolute; top:20px; right:30px; display:flex; gap:10px; z-index:10; }
         .lang-btn { background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); border:1px solid #ffb347; color:#ffd966; font-family:'Poppins',sans-serif; font-weight:700; font-size:1rem; padding:6px 16px; border-radius:30px; cursor:pointer; transition:all 0.2s; text-transform:uppercase; }
         .lang-btn.active { background:#ffb347; color:#0a0f1a; box-shadow:0 0 12px #ffb347; }
@@ -72,9 +98,168 @@
         .prestige-badge { display:inline-block; background:#1a1f1a; padding:6px 20px; border-radius:40px; font-size:0.8rem; font-weight:bold; margin-top:12px; color:#FFB347; border-left:4px solid gold; font-family:monospace; }
         
         footer { text-align:center; font-size:0.65rem; color:#5e7a5e; margin-top:28px; opacity:0.8; display:flex; flex-direction:column; gap:8px; align-items:center; }
-        .youtube-link { display:inline-flex; align-items:center; gap:8px; color:#ff8888; text-decoration:none; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:600; background:rgba(255,255,255,0.05); padding:6px 18px; border-radius:40px; border:1px solid #ff444480; transition:all 0.2s; backdrop-filter:blur(4px); }
-        .youtube-link:hover { background:rgba(255,50,50,0.2); border-color:#ff0000; color:#ffaaaa; box-shadow:0 0 12px #ff000080; }
-        
+        .social-links { display:flex; gap:25px; justify-content:center; align-items:center; margin-top:5px; }
+        .social-link { color:#ffb347; text-decoration:none; font-size:0.9rem; font-family:'Poppins',sans-serif; font-weight:500; transition:0.2s; display:inline-flex; align-items:center; gap:5px; }
+        .social-link:hover { color:#ffd966; text-shadow:0 0 8px #ffb347; }
+        .email-text { color:#aaa; font-size:0.75rem; margin-top:5px; }
+
+        .youtube-link, .tiktok-link { display:inline-flex; align-items:center; gap:8px; color:#ff8888; text-decoration:none; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:600; background:rgba(255,255,255,0.05); padding:6px 18px; border-radius:40px; border:1px solid #ff444480; transition:all 0.2s; backdrop-filter:blur(4px); }
+        .tiktok-link { color:#69C9D0; border-color:#69C9D080; }
+        .tiktok-link:hover { background:rgba(105,201,208,0.2); border-color:#69C9D0; color:#a0e0e6; box-shadow:0 0 12px #69C9D080; }
+
+        /* ---------- МОДАЛЬНОЕ ОКНО ТИР-ЛИСТА ---------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            background: #0f1a24;
+            border: 2px solid #ffb347;
+            border-radius: 48px;
+            padding: 25px 20px;
+            box-shadow: 0 20px 40px #000, 0 0 30px #ffb34780;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+        .modal-header h2 {
+            color: #FFD966;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            text-shadow: 0 0 10px #ff9900;
+        }
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ffb347;
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .tier-list-container {
+            display: flex;
+            gap: 15px;
+            flex: 1;
+            overflow: hidden;
+        }
+        .tier-grid {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+        .tier-group {
+            margin-bottom: 20px;
+        }
+        .tier-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #FFD966;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #ffb34780;
+            padding-bottom: 5px;
+        }
+        .brawler-icons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 10px;
+        }
+        .brawler-icon {
+            background: #1a2a35;
+            border-radius: 18px;
+            padding: 8px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.1s;
+            box-shadow: 0 4px 0 #0a1219;
+        }
+        .brawler-icon.selected {
+            border-color: #ffb347;
+            box-shadow: 0 0 12px #ffb347, 0 4px 0 #0a1219;
+            background: #2a3f50;
+            transform: scale(1.02);
+        }
+        .brawler-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px black);
+        }
+        .brawler-icon span {
+            color: #ddd;
+            font-size: 0.7rem;
+            font-family: 'Poppins', sans-serif;
+            margin-top: 5px;
+            text-align: center;
+        }
+        /* Ползунок-переключатель */
+        .filter-switch-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            background: #0a1219;
+            border-radius: 30px;
+            padding: 15px 5px;
+            border: 1px solid #ffb34760;
+        }
+        .switch-label {
+            color: #aaa;
+            font-size: 0.7rem;
+            margin-bottom: 8px;
+        }
+        .switch-track {
+            width: 40px;
+            height: 120px;
+            background: #2c3e50;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: inset 0 0 8px black;
+            border: 1px solid #ffb347;
+        }
+        .switch-thumb {
+            width: 36px;
+            height: 50px;
+            background: #ffb347;
+            border-radius: 30px;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: top 0.2s;
+            box-shadow: 0 2px 8px black;
+            border: 1px solid #ffe6b0;
+        }
+        .switch-thumb.right {
+            top: calc(100% - 52px);
+            background: #2ecc71;
+        }
+        .switch-text {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ffd966;
+        }
+
         @media (max-width:900px) { .main-layout { flex-direction:column; } h1 { font-size:2.5rem; } }
         @media (max-width:760px) { .container { padding:18px 12px 28px; } h1 { font-size:2rem; } .sector-card { width:140px; padding:12px 5px; } .level-btn { font-size:1rem; padding:10px 6px; } .spin-btn { padding:12px 28px; font-size:1.4rem; } }
         
@@ -92,8 +277,34 @@
     <div id="orientationSubMessage">Игра доступна только в альбомной ориентации</div>
 </div>
 
+<!-- Модальное окно META -->
+<div class="modal-overlay" id="metaModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>⚡ META ТИР-ЛИСТ ⚡</h2>
+            <button class="close-modal" id="closeModalBtn">&times;</button>
+        </div>
+        <div class="tier-list-container">
+            <div class="tier-grid" id="tierGrid"></div>
+            <div class="filter-switch-container">
+                <div class="switch-label">РЕЖИМ</div>
+                <div class="switch-track" id="filterSwitchTrack">
+                    <div class="switch-thumb" id="switchThumb"></div>
+                </div>
+                <div class="switch-text" id="switchText">Исключить</div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:15px; color:#aaa; font-size:0.8rem;">
+            Нажми на бойца, чтобы выделить. Переключатель: ← исключить / → оставить только выделенных
+        </div>
+    </div>
+</div>
+
 <div class="glow-orb"></div>
 <div class="container">
+    <div class="header-buttons">
+        <button class="meta-btn" id="metaBtn">🔥 META</button>
+    </div>
     <div class="lang-switch">
         <button class="lang-btn active" data-lang="ru">RU</button>
         <button class="lang-btn" data-lang="en">EN</button>
@@ -138,7 +349,13 @@
     </div>
     <footer>
         <div>🎮 Titul Challenge | Глобальная обнова с рангами</div>
-        <a class="youtube-link" href="https://www.youtube.com/@Shabsshnik" target="_blank">🎥 Мой YouTube: @Shabsshnik</a>
+        <div class="social-links">
+            <a class="youtube-link" href="https://www.youtube.com/@Shabsshnik" target="_blank">🎥 YouTube</a>
+            <a class="tiktok-link" href="https://www.tiktok.com/@rb_reiner?_r=1&_t=ZS-95fTNTyj1s2" target="_blank">🎵 TikTok</a>
+        </div>
+        <div class="email-text">
+            📧 Отправляйте свои видео: <a href="mailto:titulchallenge@gmail.com" style="color:#ffb347; text-decoration:none;">titulchallenge@gmail.com</a>
+        </div>
     </footer>
 </div>
 
@@ -266,7 +483,7 @@
             { brawler: "Сириус", normal: "В изгнании", neon: "В тени" }
         ];
 
-        // ---------- БАЗА ТИТУЛОВ (АНГЛИЙСКИЙ) ----------
+        // Английские титулы (полная копия с переводом)
         const TITLES_LIBRARY_EN = [
             { brawler: "Shelly", normal: "No Time to Explain!", neon: "Fantastic" },
             { brawler: "Nita", normal: "The Untamed", neon: "Wild Child" },
@@ -373,7 +590,7 @@
 
         let TITLES_LIBRARY = TITLES_LIBRARY_RU;
 
-        // ---------- РАНГИ (ключи — только русские имена) ----------
+        // ---------- РАНГИ ----------
         const rankMap = new Map();
         ['Шелли','Кольт','Булл','Брок','Эль Примо','Барли','Поко','Роза','Джесси'].forEach(b => rankMap.set(b, 'S'));
         ['Динамайк','Тик','8-БИТ','Рико','Дэррил','Пенни','Карл','Джеки','Гас','Бо','Эмз'].forEach(b => rankMap.set(b, 'A'));
@@ -381,6 +598,10 @@
         ['Мортис','Тара','Джин','Макс','Мистер П.','Спраут','Байрон','Скуик','Лу','Гавс','Базз','Фэнг','Ева','Джанет','Отис','Бастер','Грей','R-T','Виллоу','Даг','Чак','Чарли','Мико','Мелоди','Лили','Клэнси','Мо','Джуджу','Олли','Финкс','Луми','Чжэ Ён','Алли','Мина','Зигги','Джиджи','Глоуберт','Наджия'].forEach(b => rankMap.set(b, 'C'));
         ['Спайк','Ворон','Леон','Сэнди','Амбер','Мэг','Вольт','Честер','Корделиус','Кит','Драко','Кэндзи','Пирс','Кадзэ','Сириус'].forEach(b => rankMap.set(b, 'D'));
         TITLES_LIBRARY_RU.forEach(entry => { if(!rankMap.has(entry.brawler)) rankMap.set(entry.brawler, 'F'); });
+
+        // ---------- META ФИЛЬТР ----------
+        let selectedBrawlers = new Set();
+        let filterMode = 'exclude';
 
         // ---------- ПЕРЕВОДЫ ----------
         const i18n = {
@@ -416,16 +637,28 @@
         let currentTranslateX = 0, spinningActive = false, animFrame = null, spinStartTime = 0, spinDuration = 2000,
             startTranslate = 0, targetTranslate = 0, spinUsed = false, lastSelectedId = null;
 
+        function getFilteredLibrary() {
+            if (selectedBrawlers.size === 0) return TITLES_LIBRARY_RU;
+            if (filterMode === 'exclude') {
+                return TITLES_LIBRARY_RU.filter(entry => !selectedBrawlers.has(entry.brawler));
+            } else {
+                return TITLES_LIBRARY_RU.filter(entry => selectedBrawlers.has(entry.brawler));
+            }
+        }
+
         function buildSectorsForLevel(level) {
             const sectors = [];
-            TITLES_LIBRARY.forEach((entry, index) => {
-                const ruEntry = TITLES_LIBRARY_RU[index];
+            const filteredRuLib = getFilteredLibrary();
+            filteredRuLib.forEach(ruEntry => {
+                const originalIndex = TITLES_LIBRARY_RU.findIndex(e => e.brawler === ruEntry.brawler);
+                if (originalIndex === -1) return;
+                const entry = TITLES_LIBRARY[originalIndex];
                 const rank = rankMap.get(ruEntry.brawler) || 'F';
                 let includeNormal = false, includeNeon = false;
                 if (level === 'novice') { if (rank === 'S' || rank === 'A') includeNormal = true; }
                 else if (level === 'master') { if (rank === 'B' || rank === 'C') { includeNormal = true; includeNeon = true; } }
                 else if (level === 'old') { if (rank === 'D' || rank === 'F') includeNeon = true; }
-                else if (level === 'oldplus') { includeNeon = true; } // любой боец, только третий прайм
+                else if (level === 'oldplus') { includeNeon = true; }
                 
                 if (includeNormal) sectors.push({ 
                     id: ruEntry.brawler+'_normal_'+level, title: entry.normal, brawler: entry.brawler, 
@@ -517,12 +750,16 @@
             if(spinningActive || spinUsed) return;
             if(!flatSectors.length){ alert(currentLang === 'ru' ? 'Нет доступных титулов!' : 'No titles available!'); return; }
             spinUsed = true; spinBtn.disabled = true;
-            const randomIndex = Math.floor(Math.random() * flatSectors.length), targetSector = flatSectors[randomIndex];
+            
+            const randomIndex = Math.floor(Math.random() * flatSectors.length);
+            const targetSector = flatSectors[randomIndex];
+            
             let targetDuplicatedIndex = -1;
             const startSearch = flatSectors.length * 7, endSearch = flatSectors.length * 8;
             for(let i=startSearch; i<endSearch; i++) if(duplicatedSectors[i].id === targetSector.id){ targetDuplicatedIndex = i; break; }
             if(targetDuplicatedIndex === -1) for(let i=0; i<duplicatedSectors.length; i++) if(duplicatedSectors[i].id === targetSector.id){ targetDuplicatedIndex = i; break; }
             if(targetDuplicatedIndex === -1) return;
+            
             const track = document.querySelector('.wheel-track'), cards = document.querySelectorAll('.sector-card'), targetCard = cards[targetDuplicatedIndex];
             const containerRect = track.getBoundingClientRect(), cardRect = targetCard.getBoundingClientRect(),
                   containerCenter = containerRect.left + containerRect.width/2, cardCenter = cardRect.left + cardRect.width/2,
@@ -537,9 +774,8 @@
             animFrame = requestAnimationFrame(animateSpin);
         }
 
-        function setLevel(level){
-            currentLevel = level;
-            flatSectors = buildSectorsForLevel(level);
+        function regenerateAfterMetaChange() {
+            flatSectors = buildSectorsForLevel(currentLevel);
             duplicatedSectors = [];
             for(let i=0; i<15; i++) duplicatedSectors.push(...flatSectors);
             renderStrip();
@@ -548,6 +784,11 @@
             brawlerDisplay.textContent = i18n[currentLang].choose_level;
             prestigeType.textContent = "✨ — ✨";
             document.querySelectorAll('.sector-card').forEach(c=>c.classList.remove('highlight'));
+        }
+
+        function setLevel(level){
+            currentLevel = level;
+            regenerateAfterMetaChange();
         }
 
         function applyLanguage(lang){
@@ -559,13 +800,107 @@
             });
             spinBtn.textContent = i18n[lang].spin;
             if(!spinUsed) brawlerDisplay.textContent = i18n[lang].choose_level;
-            flatSectors = buildSectorsForLevel(currentLevel);
-            duplicatedSectors = [];
-            for(let i=0; i<15; i++) duplicatedSectors.push(...flatSectors);
-            renderStrip();
+            regenerateAfterMetaChange();
             if(spinUsed) updateResult();
         }
 
+        // ---------- ТИР-ЛИСТ И ИКОНКИ ----------
+        const modal = document.getElementById('metaModal');
+        const tierGrid = document.getElementById('tierGrid');
+        const switchTrack = document.getElementById('filterSwitchTrack');
+        const switchThumb = document.getElementById('switchThumb');
+        const switchText = document.getElementById('switchText');
+
+        const brawlerToId = {
+            "Шелли": "shelly", "Нита": "nita", "Кольт": "colt", "Булл": "bull", "Брок": "brock",
+            "Эль Примо": "el-primo", "Барли": "barley", "Поко": "poco", "Роза": "rosa", "Джесси": "jessie",
+            "Динамайк": "dynamike", "Тик": "tick", "8-БИТ": "8-bit", "Рико": "rico", "Дэррил": "darryl",
+            "Пенни": "penny", "Карл": "carl", "Джеки": "jacky", "Гас": "gus", "Бо": "bo", "Эмз": "emz",
+            "Сту": "stu", "Пайпер": "piper", "Пэм": "pam", "Фрэнк": "frank", "Биби": "bibi", "Беа": "bea",
+            "Нани": "nani", "Эдгар": "edgar", "Грифф": "griff", "Гром": "grom", "Бонни": "bonnie", "Гэйл": "gale",
+            "Колетт": "colette", "Белль": "belle", "Эш": "ash", "Лола": "lola", "Сэм": "sam", "Мэнди": "mandy",
+            "Мэйси": "maisie", "Хэнк": "hank", "Перл": "pearl", "Ларри и Лори": "larry-lawrie", "Анджело": "angelo",
+            "Берри": "berry", "Шейд": "shade", "Мипл": "meeple", "Транк": "trank", "Мортис": "mortis", "Тара": "tara",
+            "Джин": "gene", "Макс": "max", "Мистер П.": "mr-p", "Спраут": "sprout", "Байрон": "byron", "Скуик": "squeak",
+            "Лу": "lou", "Гавс": "ruffs", "Базз": "buzz", "Фэнг": "fang", "Ева": "eve", "Джанет": "janet", "Отис": "otis",
+            "Бастер": "buster", "Грей": "gray", "R-T": "r-t", "Виллоу": "willow", "Даг": "doug", "Чак": "chuck",
+            "Чарли": "charlie", "Мико": "mico", "Мелоди": "melodie", "Лили": "lily", "Клэнси": "clancy", "Мо": "moe",
+            "Джуджу": "juju", "Олли": "ollie", "Финкс": "finx", "Луми": "lumi", "Чжэ Ён": "jae-yong", "Алли": "allie",
+            "Мина": "mina", "Зигги": "ziggy", "Джиджи": "gigi", "Глоуберт": "globbert", "Наджия": "najia",
+            "Спайк": "spike", "Ворон": "crow", "Леон": "leon", "Сэнди": "sandy", "Амбер": "amber", "Мэг": "meg",
+            "Вольт": "volt", "Честер": "chester", "Корделиус": "cordelius", "Кит": "kit", "Драко": "draco",
+            "Кэндзи": "kenji", "Пирс": "pierce", "Кадзэ": "kaze", "Сириус": "sirius"
+        };
+
+        function renderTierList() {
+            const tiers = { 'S': [], 'A': [], 'B': [], 'C': [], 'D': [], 'F': [] };
+            TITLES_LIBRARY_RU.forEach(entry => {
+                const rank = rankMap.get(entry.brawler) || 'F';
+                tiers[rank].push(entry.brawler);
+            });
+            let html = '';
+            for (const [rank, brawlers] of Object.entries(tiers)) {
+                if (brawlers.length === 0) continue;
+                html += `<div class="tier-group"><div class="tier-title">${rank} РАНГ</div><div class="brawler-icons">`;
+                brawlers.forEach(b => {
+                    const id = brawlerToId[b] || b.toLowerCase().replace(/[. ]/g,'-');
+                    const selectedClass = selectedBrawlers.has(b) ? 'selected' : '';
+                    html += `<div class="brawler-icon ${selectedClass}" data-brawler="${b}">
+                        <img src="https://cdn.brawlify.com/brawler/${id}.png?v=1" onerror="this.src='https://cdn.brawlify.com/brawler/8-bit.png'" alt="${b}">
+                        <span>${b}</span>
+                    </div>`;
+                });
+                html += `</div></div>`;
+            }
+            tierGrid.innerHTML = html;
+            document.querySelectorAll('.brawler-icon').forEach(el => {
+                el.addEventListener('click', () => {
+                    const brawler = el.dataset.brawler;
+                    if (selectedBrawlers.has(brawler)) {
+                        selectedBrawlers.delete(brawler);
+                        el.classList.remove('selected');
+                    } else {
+                        selectedBrawlers.add(brawler);
+                        el.classList.add('selected');
+                    }
+                });
+            });
+        }
+
+        function updateSwitchUI() {
+            if (filterMode === 'exclude') {
+                switchThumb.style.top = '2px';
+                switchThumb.classList.remove('right');
+                switchText.textContent = 'Исключить';
+            } else {
+                switchThumb.style.top = 'calc(100% - 52px)';
+                switchThumb.classList.add('right');
+                switchText.textContent = 'Оставить';
+            }
+        }
+
+        switchTrack.addEventListener('click', () => {
+            filterMode = filterMode === 'exclude' ? 'include' : 'exclude';
+            updateSwitchUI();
+            regenerateAfterMetaChange();
+        });
+
+        document.getElementById('metaBtn').addEventListener('click', () => {
+            renderTierList();
+            modal.style.display = 'flex';
+        });
+        document.getElementById('closeModalBtn').addEventListener('click', () => {
+            modal.style.display = 'none';
+            regenerateAfterMetaChange();
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                regenerateAfterMetaChange();
+            }
+        });
+
+        // Инициализация игры
         levelBtns.forEach(btn => btn.addEventListener('click', ()=>{ 
             levelBtns.forEach(b=>b.classList.remove('active')); 
             btn.classList.add('active'); 
@@ -581,6 +916,7 @@
         }));
         setLevel('novice');
         applyLanguage('ru');
+        updateSwitchUI();
     })();
 </script>
 </body>
