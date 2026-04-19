@@ -425,7 +425,7 @@
                 if (level === 'novice') { if (rank === 'S' || rank === 'A') includeNormal = true; }
                 else if (level === 'master') { if (rank === 'B' || rank === 'C') { includeNormal = true; includeNeon = true; } }
                 else if (level === 'old') { if (rank === 'D' || rank === 'F') includeNeon = true; }
-                else if (level === 'oldplus') { includeNeon = true; }
+                else if (level === 'oldplus') { includeNeon = true; } // любой боец, только третий прайм
                 
                 if (includeNormal) sectors.push({ 
                     id: ruEntry.brawler+'_normal_'+level, title: entry.normal, brawler: entry.brawler, 
@@ -517,29 +517,12 @@
             if(spinningActive || spinUsed) return;
             if(!flatSectors.length){ alert(currentLang === 'ru' ? 'Нет доступных титулов!' : 'No titles available!'); return; }
             spinUsed = true; spinBtn.disabled = true;
-            
-            let targetSector;
-            if (currentLevel === 'master') {
-                // ГАРАНТИРОВАННО ФЭНГ I ПРАЙМ
-                const ruIndex = TITLES_LIBRARY_RU.findIndex(e => e.brawler === 'Фэнг');
-                const entry = TITLES_LIBRARY[ruIndex];
-                targetSector = {
-                    id: 'Фэнг_normal_master',
-                    title: entry.normal,
-                    brawler: entry.brawler,
-                    type: currentLang === 'ru' ? "🏆 ПРАЙМ I (Мастерство) 🏆" : "🏆 PRIME I (Mastery) 🏆"
-                };
-            } else {
-                const randomIndex = Math.floor(Math.random() * flatSectors.length);
-                targetSector = flatSectors[randomIndex];
-            }
-            
+            const randomIndex = Math.floor(Math.random() * flatSectors.length), targetSector = flatSectors[randomIndex];
             let targetDuplicatedIndex = -1;
             const startSearch = flatSectors.length * 7, endSearch = flatSectors.length * 8;
             for(let i=startSearch; i<endSearch; i++) if(duplicatedSectors[i].id === targetSector.id){ targetDuplicatedIndex = i; break; }
             if(targetDuplicatedIndex === -1) for(let i=0; i<duplicatedSectors.length; i++) if(duplicatedSectors[i].id === targetSector.id){ targetDuplicatedIndex = i; break; }
             if(targetDuplicatedIndex === -1) return;
-            
             const track = document.querySelector('.wheel-track'), cards = document.querySelectorAll('.sector-card'), targetCard = cards[targetDuplicatedIndex];
             const containerRect = track.getBoundingClientRect(), cardRect = targetCard.getBoundingClientRect(),
                   containerCenter = containerRect.left + containerRect.width/2, cardCenter = cardRect.left + cardRect.width/2,
@@ -597,8 +580,8 @@
             applyLanguage(lang); 
         }));
         setLevel('novice');
-        applyLanguage('ru'); 
+        applyLanguage('ru');
     })();
 </script>
 </body>
-</html>
+</html> 
