@@ -97,15 +97,13 @@
         .brawler-name { font-size:1.25rem; color:#bbddff; font-weight:600; letter-spacing:1px; }
         .prestige-badge { display:inline-block; background:#1a1f1a; padding:6px 20px; border-radius:40px; font-size:0.8rem; font-weight:bold; margin-top:12px; color:#FFB347; border-left:4px solid gold; font-family:monospace; }
         
-        footer { text-align:center; font-size:0.65rem; color:#5e7a5e; margin-top:28px; opacity:0.8; display:flex; flex-direction:column; gap:8px; align-items:center; }
-        .social-links { display:flex; gap:25px; justify-content:center; align-items:center; margin-top:5px; }
-        .social-link { color:#ffb347; text-decoration:none; font-size:0.9rem; font-family:'Poppins',sans-serif; font-weight:500; transition:0.2s; display:inline-flex; align-items:center; gap:5px; }
-        .social-link:hover { color:#ffd966; text-shadow:0 0 8px #ffb347; }
-        .email-text { color:#aaa; font-size:0.75rem; margin-top:5px; }
-
-        .youtube-link, .tiktok-link { display:inline-flex; align-items:center; gap:8px; color:#ff8888; text-decoration:none; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:600; background:rgba(255,255,255,0.05); padding:6px 18px; border-radius:40px; border:1px solid #ff444480; transition:all 0.2s; backdrop-filter:blur(4px); }
-        .tiktok-link { color:#69C9D0; border-color:#69C9D080; }
-        .tiktok-link:hover { background:rgba(105,201,208,0.2); border-color:#69C9D0; color:#a0e0e6; box-shadow:0 0 12px #69C9D080; }
+        footer { text-align:center; font-size:0.65rem; color:#5e7a5e; margin-top:28px; opacity:0.8; display:flex; flex-direction:column; gap:12px; align-items:center; }
+        .social-links { display:flex; gap:35px; justify-content:center; align-items:center; }
+        .social-icon { display:flex; flex-direction:column; align-items:center; text-decoration:none; transition:0.2s; }
+        .social-icon svg { width:36px; height:36px; filter:drop-shadow(0 0 6px #ff444480); }
+        .social-icon span { color:#ffb347; font-family:'Poppins',sans-serif; font-size:0.8rem; margin-top:4px; }
+        .social-icon:hover { transform:scale(1.1); }
+        .email-line { color:#aaa; font-size:0.75rem; border-top:1px solid #ffb34730; padding-top:12px; width:100%; max-width:400px; }
 
         /* ---------- МОДАЛЬНОЕ ОКНО ТИР-ЛИСТА ---------- */
         .modal-overlay {
@@ -281,20 +279,20 @@
 <div class="modal-overlay" id="metaModal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>⚡ META ТИР-ЛИСТ ⚡</h2>
+            <h2 id="metaModalTitle">META ТИР-ЛИСТ</h2>
             <button class="close-modal" id="closeModalBtn">&times;</button>
         </div>
         <div class="tier-list-container">
             <div class="tier-grid" id="tierGrid"></div>
             <div class="filter-switch-container">
-                <div class="switch-label">РЕЖИМ</div>
+                <div class="switch-label" data-i18n="filter_mode">РЕЖИМ</div>
                 <div class="switch-track" id="filterSwitchTrack">
                     <div class="switch-thumb" id="switchThumb"></div>
                 </div>
                 <div class="switch-text" id="switchText">Исключить</div>
             </div>
         </div>
-        <div style="text-align:center; margin-top:15px; color:#aaa; font-size:0.8rem;">
+        <div style="text-align:center; margin-top:15px; color:#aaa; font-size:0.8rem;" data-i18n="meta_hint">
             Нажми на бойца, чтобы выделить. Переключатель: ← исключить / → оставить только выделенных
         </div>
     </div>
@@ -303,7 +301,7 @@
 <div class="glow-orb"></div>
 <div class="container">
     <div class="header-buttons">
-        <button class="meta-btn" id="metaBtn">🔥 META</button>
+        <button class="meta-btn" id="metaBtn">META</button>
     </div>
     <div class="lang-switch">
         <button class="lang-btn active" data-lang="ru">RU</button>
@@ -350,10 +348,16 @@
     <footer>
         <div>🎮 Titul Challenge | Глобальная обнова с рангами</div>
         <div class="social-links">
-            <a class="youtube-link" href="https://www.youtube.com/@Shabsshnik" target="_blank">🎥 YouTube</a>
-            <a class="tiktok-link" href="https://www.tiktok.com/@rb_reiner?_r=1&_t=ZS-95fTNTyj1s2" target="_blank">🎵 TikTok</a>
+            <a class="social-icon" href="https://www.youtube.com/@Shabsshnik" target="_blank">
+                <svg viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2c-.3-1-1-1.8-2-2.1C19.8 3.5 12 3.5 12 3.5s-7.8 0-9.5.6c-1 .3-1.7 1.1-2 2.1C0 8 0 12 0 12s0 4 .5 5.8c.3 1 1 1.8 2 2.1 1.7.6 9.5.6 9.5.6s7.8 0 9.5-.6c1-.3 1.7-1.1 2-2.1.5-1.8.5-5.8.5-5.8s0-4-.5-5.8z"/><polygon points="9.5,8.5 16,12 9.5,15.5" fill="#FFF"/></svg>
+                <span>YouTube</span>
+            </a>
+            <a class="social-icon" href="https://www.tiktok.com/@rb_reiner" target="_blank">
+                <svg viewBox="0 0 24 24" fill="#000000"><path d="M19.6 5.6c-1.2 0-2.3-.4-3.2-1.1-.9-.7-1.5-1.7-1.7-2.8h-4v11.6c0 1.5-1.2 2.8-2.8 2.8s-2.8-1.2-2.8-2.8c0-1.5 1.2-2.8 2.8-2.8.3 0 .6 0 .8.1v-4c-.3 0-.6-.1-.8-.1-3.8 0-6.9 3.1-6.9 6.9s3.1 6.9 6.9 6.9 6.9-3.1 6.9-6.9V8.1c1.4 1.1 3.2 1.7 5.1 1.7v-4c-.3 0-.6 0-1-.2z" fill="#FFF"/></svg>
+                <span>TikTok</span>
+            </a>
         </div>
-        <div class="email-text">
+        <div class="email-line">
             📧 Отправляйте свои видео: <a href="mailto:titulchallenge@gmail.com" style="color:#ffb347; text-decoration:none;">titulchallenge@gmail.com</a>
         </div>
     </footer>
@@ -600,8 +604,8 @@
         TITLES_LIBRARY_RU.forEach(entry => { if(!rankMap.has(entry.brawler)) rankMap.set(entry.brawler, 'F'); });
 
         // ---------- META ФИЛЬТР ----------
-        let selectedBrawlers = new Set();
-        let filterMode = 'exclude';
+        let selectedBrawlers = new Set(); // хранит русские имена выбранных бойцов
+        let filterMode = 'exclude'; // 'exclude' - исключить выбранных, 'include' - оставить только выбранных
 
         // ---------- ПЕРЕВОДЫ ----------
         const i18n = {
@@ -610,14 +614,26 @@
                 choose_level_title: '⚡ ВЫБЕРИ УРОВЕНЬ ⚡', 
                 novice: '🔥 НОВИЧОК', master: '⚡ МАСТЕР', old: '💀 ОЛД', oldplus: '💰 ОЛД+',
                 novice_desc: 'S/A (I)', master_desc: 'B/C (I+III)', old_desc: 'D/F (III)', oldplus_desc: 'Все (III)',
-                spin: 'SPIN', spinning: '🌀 КРУТИМ...', waiting: 'Ожидание спина', stakes: '⚡ СТАВКИ СДЕЛАНЫ ⚡'
+                spin: 'SPIN', spinning: '🌀 КРУТИМ...', waiting: 'Ожидание спина', stakes: '⚡ СТАВКИ СДЕЛАНЫ ⚡',
+                meta_title: 'META ТИР-ЛИСТ',
+                filter_mode: 'РЕЖИМ',
+                exclude: 'Исключить',
+                include: 'Оставить',
+                meta_hint: 'Нажми на бойца, чтобы выделить. Переключатель: ← исключить / → оставить только выделенных',
+                rank: 'РАНГ'
             },
             en: { 
                 result_label: '🏅 YOUR TITLE 🏅', choose_level: 'Choose level and spin', 
                 choose_level_title: '⚡ SELECT LEVEL ⚡', 
                 novice: '🔥 NOVICE', master: '⚡ MASTER', old: '💀 OLD', oldplus: '💰 OLD+',
                 novice_desc: 'S/A (I)', master_desc: 'B/C (I+III)', old_desc: 'D/F (III)', oldplus_desc: 'All (III)',
-                spin: 'SPIN', spinning: '🌀 SPINNING...', waiting: 'Waiting for spin', stakes: '⚡ BETS ARE MADE ⚡'
+                spin: 'SPIN', spinning: '🌀 SPINNING...', waiting: 'Waiting for spin', stakes: '⚡ BETS ARE MADE ⚡',
+                meta_title: 'META TIER LIST',
+                filter_mode: 'MODE',
+                exclude: 'Exclude',
+                include: 'Include',
+                meta_hint: 'Click on a brawler to select. Switch: ← exclude / → keep only selected',
+                rank: 'TIER'
             }
         };
         let currentLang = 'ru';
@@ -637,18 +653,21 @@
         let currentTranslateX = 0, spinningActive = false, animFrame = null, spinStartTime = 0, spinDuration = 2000,
             startTranslate = 0, targetTranslate = 0, spinUsed = false, lastSelectedId = null;
 
+        // Функция фильтрации библиотеки титулов перед генерацией секторов
         function getFilteredLibrary() {
             if (selectedBrawlers.size === 0) return TITLES_LIBRARY_RU;
+            const ruLib = TITLES_LIBRARY_RU;
             if (filterMode === 'exclude') {
-                return TITLES_LIBRARY_RU.filter(entry => !selectedBrawlers.has(entry.brawler));
+                return ruLib.filter(entry => !selectedBrawlers.has(entry.brawler));
             } else {
-                return TITLES_LIBRARY_RU.filter(entry => selectedBrawlers.has(entry.brawler));
+                return ruLib.filter(entry => selectedBrawlers.has(entry.brawler));
             }
         }
 
         function buildSectorsForLevel(level) {
             const sectors = [];
             const filteredRuLib = getFilteredLibrary();
+            // используем индексы, чтобы сопоставить с текущим языком
             filteredRuLib.forEach(ruEntry => {
                 const originalIndex = TITLES_LIBRARY_RU.findIndex(e => e.brawler === ruEntry.brawler);
                 if (originalIndex === -1) return;
@@ -751,6 +770,7 @@
             if(!flatSectors.length){ alert(currentLang === 'ru' ? 'Нет доступных титулов!' : 'No titles available!'); return; }
             spinUsed = true; spinBtn.disabled = true;
             
+            // Восстановлены честные шансы для всех уровней
             const randomIndex = Math.floor(Math.random() * flatSectors.length);
             const targetSector = flatSectors[randomIndex];
             
@@ -800,17 +820,24 @@
             });
             spinBtn.textContent = i18n[lang].spin;
             if(!spinUsed) brawlerDisplay.textContent = i18n[lang].choose_level;
+            // Обновить текст в модальном окне
+            document.getElementById('metaModalTitle').textContent = i18n[lang].meta_title;
+            document.querySelector('[data-i18n="meta_hint"]').textContent = i18n[lang].meta_hint;
+            document.querySelector('[data-i18n="filter_mode"]').textContent = i18n[lang].filter_mode;
+            document.getElementById('switchText').textContent = filterMode === 'exclude' ? i18n[lang].exclude : i18n[lang].include;
             regenerateAfterMetaChange();
             if(spinUsed) updateResult();
+            if (modal.style.display === 'flex') renderTierList(); // перерисовать тир-лист при смене языка
         }
 
-        // ---------- ТИР-ЛИСТ И ИКОНКИ ----------
+        // ---------- ИНИЦИАЛИЗАЦИЯ ТИР-ЛИСТА ----------
         const modal = document.getElementById('metaModal');
         const tierGrid = document.getElementById('tierGrid');
         const switchTrack = document.getElementById('filterSwitchTrack');
         const switchThumb = document.getElementById('switchThumb');
         const switchText = document.getElementById('switchText');
 
+        // Сопоставление имён бойцов с ID для картинок (brawlify)
         const brawlerToId = {
             "Шелли": "shelly", "Нита": "nita", "Кольт": "colt", "Булл": "bull", "Брок": "brock",
             "Эль Примо": "el-primo", "Барли": "barley", "Поко": "poco", "Роза": "rosa", "Джесси": "jessie",
@@ -832,6 +859,28 @@
             "Кэндзи": "kenji", "Пирс": "pierce", "Кадзэ": "kaze", "Сириус": "sirius"
         };
 
+        // Английские имена для отображения
+        const brawlerNamesEn = {
+            "Шелли": "Shelly", "Нита": "Nita", "Кольт": "Colt", "Булл": "Bull", "Брок": "Brock",
+            "Эль Примо": "El Primo", "Барли": "Barley", "Поко": "Poco", "Роза": "Rosa", "Джесси": "Jessie",
+            "Динамайк": "Dynamike", "Тик": "Tick", "8-БИТ": "8-Bit", "Рико": "Rico", "Дэррил": "Darryl",
+            "Пенни": "Penny", "Карл": "Carl", "Джеки": "Jacky", "Гас": "Gus", "Бо": "Bo", "Эмз": "Emz",
+            "Сту": "Stu", "Пайпер": "Piper", "Пэм": "Pam", "Фрэнк": "Frank", "Биби": "Bibi", "Беа": "Bea",
+            "Нани": "Nani", "Эдгар": "Edgar", "Грифф": "Griff", "Гром": "Grom", "Бонни": "Bonnie", "Гэйл": "Gale",
+            "Колетт": "Colette", "Белль": "Belle", "Эш": "Ash", "Лола": "Lola", "Сэм": "Sam", "Мэнди": "Mandy",
+            "Мэйси": "Maisie", "Хэнк": "Hank", "Перл": "Pearl", "Ларри и Лори": "Larry & Lawrie", "Анджело": "Angelo",
+            "Берри": "Berry", "Шейд": "Shade", "Мипл": "Meeple", "Транк": "Trank", "Мортис": "Mortis", "Тара": "Tara",
+            "Джин": "Gene", "Макс": "Max", "Мистер П.": "Mr. P", "Спраут": "Sprout", "Байрон": "Byron", "Скуик": "Squeak",
+            "Лу": "Lou", "Гавс": "Ruffs", "Базз": "Buzz", "Фэнг": "Fang", "Ева": "Eve", "Джанет": "Janet", "Отис": "Otis",
+            "Бастер": "Buster", "Грей": "Gray", "R-T": "R-T", "Виллоу": "Willow", "Даг": "Doug", "Чак": "Chuck",
+            "Чарли": "Charlie", "Мико": "Mico", "Мелоди": "Melodie", "Лили": "Lily", "Клэнси": "Clancy", "Мо": "Moe",
+            "Джуджу": "Juju", "Олли": "Ollie", "Финкс": "Finx", "Луми": "Lumi", "Чжэ Ён": "Jae-yong", "Алли": "Allie",
+            "Мина": "Mina", "Зигги": "Ziggy", "Джиджи": "Gigi", "Глоуберт": "Globbert", "Наджия": "Najia",
+            "Спайк": "Spike", "Ворон": "Crow", "Леон": "Leon", "Сэнди": "Sandy", "Амбер": "Amber", "Мэг": "Meg",
+            "Вольт": "Volt", "Честер": "Chester", "Корделиус": "Cordelius", "Кит": "Kit", "Драко": "Draco",
+            "Кэндзи": "Kenji", "Пирс": "Pierce", "Кадзэ": "Kaze", "Сириус": "Sirius"
+        };
+
         function renderTierList() {
             const tiers = { 'S': [], 'A': [], 'B': [], 'C': [], 'D': [], 'F': [] };
             TITLES_LIBRARY_RU.forEach(entry => {
@@ -841,20 +890,21 @@
             let html = '';
             for (const [rank, brawlers] of Object.entries(tiers)) {
                 if (brawlers.length === 0) continue;
-                html += `<div class="tier-group"><div class="tier-title">${rank} РАНГ</div><div class="brawler-icons">`;
+                html += `<div class="tier-group"><div class="tier-title">${rank} ${i18n[currentLang].rank}</div><div class="brawler-icons">`;
                 brawlers.forEach(b => {
                     const id = brawlerToId[b] || b.toLowerCase().replace(/[. ]/g,'-');
                     const selectedClass = selectedBrawlers.has(b) ? 'selected' : '';
+                    const displayName = (currentLang === 'en' && brawlerNamesEn[b]) ? brawlerNamesEn[b] : b;
                     html += `<div class="brawler-icon ${selectedClass}" data-brawler="${b}">
-                        <img src="https://cdn.brawlify.com/brawler/${id}.png?v=1" onerror="this.src='https://cdn.brawlify.com/brawler/8-bit.png'" alt="${b}">
-                        <span>${b}</span>
+                        <img src="https://cdn.brawlify.com/brawler/${id}.png?v=1" onerror="this.src='https://cdn.brawlify.com/brawler/8-bit.png'">
+                        <span>${displayName}</span>
                     </div>`;
                 });
                 html += `</div></div>`;
             }
             tierGrid.innerHTML = html;
             document.querySelectorAll('.brawler-icon').forEach(el => {
-                el.addEventListener('click', () => {
+                el.addEventListener('click', (e) => {
                     const brawler = el.dataset.brawler;
                     if (selectedBrawlers.has(brawler)) {
                         selectedBrawlers.delete(brawler);
@@ -871,11 +921,11 @@
             if (filterMode === 'exclude') {
                 switchThumb.style.top = '2px';
                 switchThumb.classList.remove('right');
-                switchText.textContent = 'Исключить';
+                switchText.textContent = i18n[currentLang].exclude;
             } else {
                 switchThumb.style.top = 'calc(100% - 52px)';
                 switchThumb.classList.add('right');
-                switchText.textContent = 'Оставить';
+                switchText.textContent = i18n[currentLang].include;
             }
         }
 
@@ -885,19 +935,18 @@
             regenerateAfterMetaChange();
         });
 
+        // Кнопка META
         document.getElementById('metaBtn').addEventListener('click', () => {
             renderTierList();
             modal.style.display = 'flex';
         });
         document.getElementById('closeModalBtn').addEventListener('click', () => {
             modal.style.display = 'none';
-            regenerateAfterMetaChange();
+            regenerateAfterMetaChange(); // применить фильтр после закрытия
         });
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                regenerateAfterMetaChange();
-            }
+            if (e.target === modal) modal.style.display = 'none';
+            regenerateAfterMetaChange();
         });
 
         // Инициализация игры
