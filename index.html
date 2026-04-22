@@ -55,6 +55,7 @@
             letter-spacing: 2px;
             transition: 0.1s;
             border: 1px solid #d2b4de;
+            text-transform: uppercase;
         }
         .meta-btn:active { transform: translateY(4px); box-shadow: 0 0 0 #4a235a, 0 0 20px #9b59b6; }
 
@@ -97,13 +98,12 @@
         .brawler-name { font-size:1.25rem; color:#bbddff; font-weight:600; letter-spacing:1px; }
         .prestige-badge { display:inline-block; background:#1a1f1a; padding:6px 20px; border-radius:40px; font-size:0.8rem; font-weight:bold; margin-top:12px; color:#FFB347; border-left:4px solid gold; font-family:monospace; }
         
-        footer { text-align:center; font-size:0.65rem; color:#5e7a5e; margin-top:28px; opacity:0.8; display:flex; flex-direction:column; gap:12px; align-items:center; }
-        .social-links { display:flex; gap:35px; justify-content:center; align-items:center; }
-        .social-icon { display:flex; flex-direction:column; align-items:center; text-decoration:none; transition:0.2s; }
-        .social-icon svg { width:36px; height:36px; filter:drop-shadow(0 0 6px #ff444480); }
-        .social-icon span { color:#ffb347; font-family:'Poppins',sans-serif; font-size:0.8rem; margin-top:4px; }
-        .social-icon:hover { transform:scale(1.1); }
-        .email-line { color:#aaa; font-size:0.75rem; border-top:1px solid #ffb34730; padding-top:12px; width:100%; max-width:400px; }
+        footer { text-align:center; font-size:0.65rem; color:#5e7a5e; margin-top:28px; opacity:0.8; display:flex; flex-direction:column; gap:15px; align-items:center; }
+        .footer-links { display:flex; gap:30px; justify-content:center; flex-wrap:wrap; }
+        .social-icon-link { display:inline-flex; align-items:center; gap:6px; color:#ff8888; text-decoration:none; font-size:1rem; font-family:'Poppins',sans-serif; font-weight:500; transition:all 0.2s; }
+        .social-icon-link:hover { color:#ffaaaa; filter:drop-shadow(0 0 8px #ff000080); }
+        .social-icon-link svg { width:24px; height:24px; }
+        .email-text { font-size:0.75rem; color:#aaa; }
 
         /* ---------- МОДАЛЬНОЕ ОКНО ТИР-ЛИСТА ---------- */
         .modal-overlay {
@@ -132,7 +132,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding: 0 10px;
         }
         .modal-header h2 {
@@ -149,9 +149,35 @@
             cursor: pointer;
             line-height: 1;
         }
+        .filter-mode-selector {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .filter-mode-btn {
+            background: transparent;
+            border: 2px solid #ffb347;
+            color: #ffd966;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.3);
+        }
+        .filter-mode-btn.active {
+            background: #ffb347;
+            color: #0a0f1a;
+            box-shadow: 0 0 12px #ffb347;
+        }
         .tier-list-container {
             display: flex;
-            gap: 15px;
             flex: 1;
             overflow: hidden;
         }
@@ -208,59 +234,48 @@
             margin-top: 5px;
             text-align: center;
         }
-        /* Ползунок-переключатель */
-        .filter-switch-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            background: #0a1219;
-            border-radius: 30px;
-            padding: 15px 5px;
-            border: 1px solid #ffb34760;
-        }
-        .switch-label {
-            color: #aaa;
-            font-size: 0.7rem;
-            margin-bottom: 8px;
-        }
-        .switch-track {
-            width: 40px;
-            height: 120px;
-            background: #2c3e50;
-            border-radius: 30px;
-            position: relative;
-            cursor: pointer;
-            box-shadow: inset 0 0 8px black;
-            border: 1px solid #ffb347;
-        }
-        .switch-thumb {
-            width: 36px;
-            height: 50px;
-            background: #ffb347;
-            border-radius: 30px;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: top 0.2s;
-            box-shadow: 0 2px 8px black;
-            border: 1px solid #ffe6b0;
-        }
-        .switch-thumb.right {
-            top: calc(100% - 52px);
-            background: #2ecc71;
-        }
-        .switch-text {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: #ffd966;
+        .modal-hint {
+            text-align:center; 
+            margin-top:15px; 
+            color:#aaa; 
+            font-size:0.8rem;
         }
 
-        @media (max-width:900px) { .main-layout { flex-direction:column; } h1 { font-size:2.5rem; } }
-        @media (max-width:760px) { .container { padding:18px 12px 28px; } h1 { font-size:2rem; } .sector-card { width:140px; padding:12px 5px; } .level-btn { font-size:1rem; padding:10px 6px; } .spin-btn { padding:12px 28px; font-size:1.4rem; } }
-        
+        /* Адаптация под телефоны */
+        @media (max-width: 700px) {
+            .container { padding: 16px 12px 24px; border-radius: 32px; }
+            h1 { font-size: 2.2rem; }
+            .header-buttons { left: 15px; top: 15px; }
+            .lang-switch { right: 15px; top: 15px; }
+            .meta-btn { font-size: 1rem; padding: 6px 12px; }
+            .lang-btn { font-size: 0.8rem; padding: 4px 10px; }
+            .level-panel { padding: 12px 8px; }
+            .level-title { font-size: 1.2rem; margin-bottom: 12px; }
+            .level-btn { font-size: 1rem; padding: 10px 5px; }
+            .wheel-horizontal-container { padding: 12px 8px; }
+            .sector-card { width: 130px; padding: 10px 5px; }
+            .pointer-indicator { top: -22px; width: 50px; height: 50px; }
+            .spin-btn { padding: 12px 24px; font-size: 1.5rem; }
+            .result-card { padding: 14px 12px; }
+            .title-name { font-size: 1.8rem; }
+            .brawler-name { font-size: 1rem; }
+            .prestige-badge { font-size: 0.7rem; padding: 4px 12px; }
+
+            .modal-content { padding: 16px 12px; border-radius: 32px; }
+            .modal-header h2 { font-size: 1.5rem; }
+            .close-modal { font-size: 2rem; }
+            .filter-mode-btn { font-size: 0.8rem; padding: 6px 12px; }
+            .brawler-icons { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); }
+            .brawler-icon img { width: 40px; height: 40px; }
+            .social-icon-link { font-size: 0.9rem; }
+        }
+
+        @media (max-width: 480px) {
+            .sector-card { width: 110px; }
+            .sector-card span.title-text { font-size: 0.8rem; }
+            .sector-card span.brawler-mini { font-size: 0.6rem; }
+        }
+
         .glow-effect { animation:winFlash 0.4s cubic-bezier(0.2,1.6,0.4,1); }
         @keyframes winFlash { 0% { text-shadow:0 0 0px gold; transform:scale(1);} 50% { text-shadow:0 0 20px #ffb347, 0 0 30px #ff7b00; transform:scale(1.02);} 100% { text-shadow:0 0 0px gold; transform:scale(1);} }
     </style>
@@ -282,18 +297,15 @@
             <h2 id="metaModalTitle">META ТИР-ЛИСТ</h2>
             <button class="close-modal" id="closeModalBtn">&times;</button>
         </div>
+        <div class="filter-mode-selector">
+            <button class="filter-mode-btn active" data-mode="exclude" id="modeExcludeBtn" data-i18n="exclude">Исключить</button>
+            <button class="filter-mode-btn" data-mode="include" id="modeIncludeBtn" data-i18n="include">Оставить</button>
+        </div>
         <div class="tier-list-container">
             <div class="tier-grid" id="tierGrid"></div>
-            <div class="filter-switch-container">
-                <div class="switch-label" data-i18n="filter_mode">РЕЖИМ</div>
-                <div class="switch-track" id="filterSwitchTrack">
-                    <div class="switch-thumb" id="switchThumb"></div>
-                </div>
-                <div class="switch-text" id="switchText">Исключить</div>
-            </div>
         </div>
-        <div style="text-align:center; margin-top:15px; color:#aaa; font-size:0.8rem;" data-i18n="meta_hint">
-            Нажми на бойца, чтобы выделить. Переключатель: ← исключить / → оставить только выделенных
+        <div class="modal-hint" data-i18n="meta_hint">
+            Нажми на бойца, чтобы выделить. Режим: исключить выбранных или оставить только их.
         </div>
     </div>
 </div>
@@ -347,18 +359,22 @@
     </div>
     <footer>
         <div>🎮 Titul Challenge | Глобальная обнова с рангами</div>
-        <div class="social-links">
-            <a class="social-icon" href="https://www.youtube.com/@Shabsshnik" target="_blank">
-                <svg viewBox="0 0 24 24" fill="#FF0000"><path d="M23.5 6.2c-.3-1-1-1.8-2-2.1C19.8 3.5 12 3.5 12 3.5s-7.8 0-9.5.6c-1 .3-1.7 1.1-2 2.1C0 8 0 12 0 12s0 4 .5 5.8c.3 1 1 1.8 2 2.1 1.7.6 9.5.6 9.5.6s7.8 0 9.5-.6c1-.3 1.7-1.1 2-2.1.5-1.8.5-5.8.5-5.8s0-4-.5-5.8z"/><polygon points="9.5,8.5 16,12 9.5,15.5" fill="#FFF"/></svg>
-                <span>YouTube</span>
+        <div class="footer-links">
+            <a class="social-icon-link" href="https://www.youtube.com/@Shabsshnik" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                YouTube
             </a>
-            <a class="social-icon" href="https://www.tiktok.com/@rb_reiner" target="_blank">
-                <svg viewBox="0 0 24 24" fill="#000000"><path d="M19.6 5.6c-1.2 0-2.3-.4-3.2-1.1-.9-.7-1.5-1.7-1.7-2.8h-4v11.6c0 1.5-1.2 2.8-2.8 2.8s-2.8-1.2-2.8-2.8c0-1.5 1.2-2.8 2.8-2.8.3 0 .6 0 .8.1v-4c-.3 0-.6-.1-.8-.1-3.8 0-6.9 3.1-6.9 6.9s3.1 6.9 6.9 6.9 6.9-3.1 6.9-6.9V8.1c1.4 1.1 3.2 1.7 5.1 1.7v-4c-.3 0-.6 0-1-.2z" fill="#FFF"/></svg>
-                <span>TikTok</span>
+            <a class="social-icon-link" href="https://www.tiktok.com/@rb_reiner" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                </svg>
+                TikTok
             </a>
         </div>
-        <div class="email-line">
-            📧 Отправляйте свои видео: <a href="mailto:titulchallenge@gmail.com" style="color:#ffb347; text-decoration:none;">titulchallenge@gmail.com</a>
+        <div class="email-text">
+            📧 Отправляйте свои видео: <a href="mailto:titulchallenge@gmail.com" style="color:#ff8888; text-decoration:none;">titulchallenge@gmail.com</a>
         </div>
     </footer>
 </div>
@@ -604,8 +620,8 @@
         TITLES_LIBRARY_RU.forEach(entry => { if(!rankMap.has(entry.brawler)) rankMap.set(entry.brawler, 'F'); });
 
         // ---------- META ФИЛЬТР ----------
-        let selectedBrawlers = new Set(); // хранит русские имена выбранных бойцов
-        let filterMode = 'exclude'; // 'exclude' - исключить выбранных, 'include' - оставить только выбранных
+        let selectedBrawlers = new Set();
+        let filterMode = 'exclude'; // 'exclude' или 'include'
 
         // ---------- ПЕРЕВОДЫ ----------
         const i18n = {
@@ -616,10 +632,9 @@
                 novice_desc: 'S/A (I)', master_desc: 'B/C (I+III)', old_desc: 'D/F (III)', oldplus_desc: 'Все (III)',
                 spin: 'SPIN', spinning: '🌀 КРУТИМ...', waiting: 'Ожидание спина', stakes: '⚡ СТАВКИ СДЕЛАНЫ ⚡',
                 meta_title: 'META ТИР-ЛИСТ',
-                filter_mode: 'РЕЖИМ',
                 exclude: 'Исключить',
                 include: 'Оставить',
-                meta_hint: 'Нажми на бойца, чтобы выделить. Переключатель: ← исключить / → оставить только выделенных',
+                meta_hint: 'Нажми на бойца, чтобы выделить. Режим: исключить выбранных или оставить только их.',
                 rank: 'РАНГ'
             },
             en: { 
@@ -629,10 +644,9 @@
                 novice_desc: 'S/A (I)', master_desc: 'B/C (I+III)', old_desc: 'D/F (III)', oldplus_desc: 'All (III)',
                 spin: 'SPIN', spinning: '🌀 SPINNING...', waiting: 'Waiting for spin', stakes: '⚡ BETS ARE MADE ⚡',
                 meta_title: 'META TIER LIST',
-                filter_mode: 'MODE',
                 exclude: 'Exclude',
                 include: 'Include',
-                meta_hint: 'Click on a brawler to select. Switch: ← exclude / → keep only selected',
+                meta_hint: 'Click on a brawler to select. Mode: exclude selected or keep only selected.',
                 rank: 'TIER'
             }
         };
@@ -643,6 +657,7 @@
         const titleDisplay = document.getElementById('titleDisplay'), brawlerDisplay = document.getElementById('brawlerDisplay');
         const prestigeType = document.getElementById('prestigeType'), resultCard = document.getElementById('resultCard');
         const levelBtns = document.querySelectorAll('.level-btn'), langBtns = document.querySelectorAll('.lang-btn');
+        const modeExcludeBtn = document.getElementById('modeExcludeBtn'), modeIncludeBtn = document.getElementById('modeIncludeBtn');
 
         let currentLevel = 'novice';
         let flatSectors = buildSectorsForLevel(currentLevel);
@@ -653,7 +668,6 @@
         let currentTranslateX = 0, spinningActive = false, animFrame = null, spinStartTime = 0, spinDuration = 2000,
             startTranslate = 0, targetTranslate = 0, spinUsed = false, lastSelectedId = null;
 
-        // Функция фильтрации библиотеки титулов перед генерацией секторов
         function getFilteredLibrary() {
             if (selectedBrawlers.size === 0) return TITLES_LIBRARY_RU;
             const ruLib = TITLES_LIBRARY_RU;
@@ -667,7 +681,6 @@
         function buildSectorsForLevel(level) {
             const sectors = [];
             const filteredRuLib = getFilteredLibrary();
-            // используем индексы, чтобы сопоставить с текущим языком
             filteredRuLib.forEach(ruEntry => {
                 const originalIndex = TITLES_LIBRARY_RU.findIndex(e => e.brawler === ruEntry.brawler);
                 if (originalIndex === -1) return;
@@ -770,7 +783,6 @@
             if(!flatSectors.length){ alert(currentLang === 'ru' ? 'Нет доступных титулов!' : 'No titles available!'); return; }
             spinUsed = true; spinBtn.disabled = true;
             
-            // Восстановлены честные шансы для всех уровней
             const randomIndex = Math.floor(Math.random() * flatSectors.length);
             const targetSector = flatSectors[randomIndex];
             
@@ -820,24 +832,19 @@
             });
             spinBtn.textContent = i18n[lang].spin;
             if(!spinUsed) brawlerDisplay.textContent = i18n[lang].choose_level;
-            // Обновить текст в модальном окне
             document.getElementById('metaModalTitle').textContent = i18n[lang].meta_title;
             document.querySelector('[data-i18n="meta_hint"]').textContent = i18n[lang].meta_hint;
-            document.querySelector('[data-i18n="filter_mode"]').textContent = i18n[lang].filter_mode;
-            document.getElementById('switchText').textContent = filterMode === 'exclude' ? i18n[lang].exclude : i18n[lang].include;
+            modeExcludeBtn.textContent = i18n[lang].exclude;
+            modeIncludeBtn.textContent = i18n[lang].include;
             regenerateAfterMetaChange();
             if(spinUsed) updateResult();
-            if (modal.style.display === 'flex') renderTierList(); // перерисовать тир-лист при смене языка
+            if (modal.style.display === 'flex') renderTierList();
         }
 
         // ---------- ИНИЦИАЛИЗАЦИЯ ТИР-ЛИСТА ----------
         const modal = document.getElementById('metaModal');
         const tierGrid = document.getElementById('tierGrid');
-        const switchTrack = document.getElementById('filterSwitchTrack');
-        const switchThumb = document.getElementById('switchThumb');
-        const switchText = document.getElementById('switchText');
 
-        // Сопоставление имён бойцов с ID для картинок (brawlify)
         const brawlerToId = {
             "Шелли": "shelly", "Нита": "nita", "Кольт": "colt", "Булл": "bull", "Брок": "brock",
             "Эль Примо": "el-primo", "Барли": "barley", "Поко": "poco", "Роза": "rosa", "Джесси": "jessie",
@@ -856,36 +863,34 @@
             "Мина": "mina", "Зигги": "ziggy", "Джиджи": "gigi", "Глоуберт": "globbert", "Наджия": "najia",
             "Спайк": "spike", "Ворон": "crow", "Леон": "leon", "Сэнди": "sandy", "Амбер": "amber", "Мэг": "meg",
             "Вольт": "volt", "Честер": "chester", "Корделиус": "cordelius", "Кит": "kit", "Драко": "draco",
-            "Кэндзи": "kenji", "Пирс": "pierce", "Кадзэ": "kaze", "Сириус": "sirius"
-        };
-
-        // Английские имена для отображения
-        const brawlerNamesEn = {
-            "Шелли": "Shelly", "Нита": "Nita", "Кольт": "Colt", "Булл": "Bull", "Брок": "Brock",
-            "Эль Примо": "El Primo", "Барли": "Barley", "Поко": "Poco", "Роза": "Rosa", "Джесси": "Jessie",
-            "Динамайк": "Dynamike", "Тик": "Tick", "8-БИТ": "8-Bit", "Рико": "Rico", "Дэррил": "Darryl",
-            "Пенни": "Penny", "Карл": "Carl", "Джеки": "Jacky", "Гас": "Gus", "Бо": "Bo", "Эмз": "Emz",
-            "Сту": "Stu", "Пайпер": "Piper", "Пэм": "Pam", "Фрэнк": "Frank", "Биби": "Bibi", "Беа": "Bea",
-            "Нани": "Nani", "Эдгар": "Edgar", "Грифф": "Griff", "Гром": "Grom", "Бонни": "Bonnie", "Гэйл": "Gale",
-            "Колетт": "Colette", "Белль": "Belle", "Эш": "Ash", "Лола": "Lola", "Сэм": "Sam", "Мэнди": "Mandy",
-            "Мэйси": "Maisie", "Хэнк": "Hank", "Перл": "Pearl", "Ларри и Лори": "Larry & Lawrie", "Анджело": "Angelo",
-            "Берри": "Berry", "Шейд": "Shade", "Мипл": "Meeple", "Транк": "Trank", "Мортис": "Mortis", "Тара": "Tara",
-            "Джин": "Gene", "Макс": "Max", "Мистер П.": "Mr. P", "Спраут": "Sprout", "Байрон": "Byron", "Скуик": "Squeak",
-            "Лу": "Lou", "Гавс": "Ruffs", "Базз": "Buzz", "Фэнг": "Fang", "Ева": "Eve", "Джанет": "Janet", "Отис": "Otis",
-            "Бастер": "Buster", "Грей": "Gray", "R-T": "R-T", "Виллоу": "Willow", "Даг": "Doug", "Чак": "Chuck",
-            "Чарли": "Charlie", "Мико": "Mico", "Мелоди": "Melodie", "Лили": "Lily", "Клэнси": "Clancy", "Мо": "Moe",
-            "Джуджу": "Juju", "Олли": "Ollie", "Финкс": "Finx", "Луми": "Lumi", "Чжэ Ён": "Jae-yong", "Алли": "Allie",
-            "Мина": "Mina", "Зигги": "Ziggy", "Джиджи": "Gigi", "Глоуберт": "Globbert", "Наджия": "Najia",
-            "Спайк": "Spike", "Ворон": "Crow", "Леон": "Leon", "Сэнди": "Sandy", "Амбер": "Amber", "Мэг": "Meg",
-            "Вольт": "Volt", "Честер": "Chester", "Корделиус": "Cordelius", "Кит": "Kit", "Драко": "Draco",
-            "Кэндзи": "Kenji", "Пирс": "Pierce", "Кадзэ": "Kaze", "Сириус": "Sirius"
+            "Кэндзи": "kenji", "Пирс": "pierce", "Кадзэ": "kaze", "Сириус": "sirius",
+            // Английские ключи
+            "Shelly": "shelly", "Nita": "nita", "Colt": "colt", "Bull": "bull", "Brock": "brock",
+            "El Primo": "el-primo", "Barley": "barley", "Poco": "poco", "Rosa": "rosa", "Jessie": "jessie",
+            "Dynamike": "dynamike", "Tick": "tick", "8-Bit": "8-bit", "Rico": "rico", "Darryl": "darryl",
+            "Penny": "penny", "Carl": "carl", "Jacky": "jacky", "Gus": "gus", "Bo": "bo", "Emz": "emz",
+            "Stu": "stu", "Piper": "piper", "Pam": "pam", "Frank": "frank", "Bibi": "bibi", "Bea": "bea",
+            "Nani": "nani", "Edgar": "edgar", "Griff": "griff", "Grom": "grom", "Bonnie": "bonnie", "Gale": "gale",
+            "Colette": "colette", "Belle": "belle", "Ash": "ash", "Lola": "lola", "Sam": "sam", "Mandy": "mandy",
+            "Maisie": "maisie", "Hank": "hank", "Pearl": "pearl", "Larry & Lawrie": "larry-lawrie", "Angelo": "angelo",
+            "Berry": "berry", "Shade": "shade", "Meeple": "meeple", "Trank": "trank", "Mortis": "mortis", "Tara": "tara",
+            "Gene": "gene", "Max": "max", "Mr. P": "mr-p", "Sprout": "sprout", "Byron": "byron", "Squeak": "squeak",
+            "Lou": "lou", "Ruffs": "ruffs", "Buzz": "buzz", "Fang": "fang", "Eve": "eve", "Janet": "janet", "Otis": "otis",
+            "Buster": "buster", "Gray": "gray", "R-T": "r-t", "Willow": "willow", "Doug": "doug", "Chuck": "chuck",
+            "Charlie": "charlie", "Mico": "mico", "Melodie": "melodie", "Lily": "lily", "Clancy": "clancy", "Moe": "moe",
+            "Juju": "juju", "Ollie": "ollie", "Finx": "finx", "Lumi": "lumi", "Jae-yong": "jae-yong", "Allie": "allie",
+            "Mina": "mina", "Ziggy": "ziggy", "Gigi": "gigi", "Globbert": "globbert", "Najia": "najia",
+            "Spike": "spike", "Crow": "crow", "Leon": "leon", "Sandy": "sandy", "Amber": "amber", "Meg": "meg",
+            "Volt": "volt", "Chester": "chester", "Cordelius": "cordelius", "Kit": "kit", "Draco": "draco",
+            "Kenji": "kenji", "Pierce": "pierce", "Kaze": "kaze", "Sirius": "sirius"
         };
 
         function renderTierList() {
             const tiers = { 'S': [], 'A': [], 'B': [], 'C': [], 'D': [], 'F': [] };
-            TITLES_LIBRARY_RU.forEach(entry => {
-                const rank = rankMap.get(entry.brawler) || 'F';
-                tiers[rank].push(entry.brawler);
+            TITLES_LIBRARY_RU.forEach((ruEntry, index) => {
+                const rank = rankMap.get(ruEntry.brawler) || 'F';
+                const displayName = TITLES_LIBRARY[index].brawler;
+                tiers[rank].push(displayName);
             });
             let html = '';
             for (const [rank, brawlers] of Object.entries(tiers)) {
@@ -893,11 +898,11 @@
                 html += `<div class="tier-group"><div class="tier-title">${rank} ${i18n[currentLang].rank}</div><div class="brawler-icons">`;
                 brawlers.forEach(b => {
                     const id = brawlerToId[b] || b.toLowerCase().replace(/[. ]/g,'-');
-                    const selectedClass = selectedBrawlers.has(b) ? 'selected' : '';
-                    const displayName = (currentLang === 'en' && brawlerNamesEn[b]) ? brawlerNamesEn[b] : b;
-                    html += `<div class="brawler-icon ${selectedClass}" data-brawler="${b}">
+                    const ruName = TITLES_LIBRARY_RU[TITLES_LIBRARY.findIndex(e => e.brawler === b)]?.brawler || b;
+                    const selectedClass = selectedBrawlers.has(ruName) ? 'selected' : '';
+                    html += `<div class="brawler-icon ${selectedClass}" data-brawler="${ruName}">
                         <img src="https://cdn.brawlify.com/brawler/${id}.png?v=1" onerror="this.src='https://cdn.brawlify.com/brawler/8-bit.png'">
-                        <span>${displayName}</span>
+                        <span>${b}</span>
                     </div>`;
                 });
                 html += `</div></div>`;
@@ -917,39 +922,42 @@
             });
         }
 
-        function updateSwitchUI() {
+        function setActiveModeButtons() {
             if (filterMode === 'exclude') {
-                switchThumb.style.top = '2px';
-                switchThumb.classList.remove('right');
-                switchText.textContent = i18n[currentLang].exclude;
+                modeExcludeBtn.classList.add('active');
+                modeIncludeBtn.classList.remove('active');
             } else {
-                switchThumb.style.top = 'calc(100% - 52px)';
-                switchThumb.classList.add('right');
-                switchText.textContent = i18n[currentLang].include;
+                modeIncludeBtn.classList.add('active');
+                modeExcludeBtn.classList.remove('active');
             }
         }
 
-        switchTrack.addEventListener('click', () => {
-            filterMode = filterMode === 'exclude' ? 'include' : 'exclude';
-            updateSwitchUI();
+        modeExcludeBtn.addEventListener('click', () => {
+            filterMode = 'exclude';
+            setActiveModeButtons();
             regenerateAfterMetaChange();
+            if (modal.style.display === 'flex') renderTierList();
+        });
+        modeIncludeBtn.addEventListener('click', () => {
+            filterMode = 'include';
+            setActiveModeButtons();
+            regenerateAfterMetaChange();
+            if (modal.style.display === 'flex') renderTierList();
         });
 
-        // Кнопка META
         document.getElementById('metaBtn').addEventListener('click', () => {
             renderTierList();
             modal.style.display = 'flex';
         });
         document.getElementById('closeModalBtn').addEventListener('click', () => {
             modal.style.display = 'none';
-            regenerateAfterMetaChange(); // применить фильтр после закрытия
+            regenerateAfterMetaChange();
         });
         modal.addEventListener('click', (e) => {
             if (e.target === modal) modal.style.display = 'none';
             regenerateAfterMetaChange();
         });
 
-        // Инициализация игры
         levelBtns.forEach(btn => btn.addEventListener('click', ()=>{ 
             levelBtns.forEach(b=>b.classList.remove('active')); 
             btn.classList.add('active'); 
@@ -965,7 +973,7 @@
         }));
         setLevel('novice');
         applyLanguage('ru');
-        updateSwitchUI();
+        setActiveModeButtons();
     })();
 </script>
 </body>
